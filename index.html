@@ -11,18 +11,17 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
           $( function() {
+            
             $( ".widget input[type=submit], .widget a, .widget button" ).button();
             $( "button, input, a" ).click( function( event ) {
               event.preventDefault();
             } );
+            
+            $('#button1').click(function(){
+              alert(1);          
+            });
+            
           } );
-          
-          $('#button1').click(function(){
-            alert(1);          
-          });
-          function button1() {
-            alert(1);
-          }
         </script>
     </head>
     <body>
