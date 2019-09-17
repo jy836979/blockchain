@@ -16,19 +16,26 @@
               event.preventDefault();
             } );
             
-            
-            $('#button1').button().click(function(){
-              alert(1);          
-            });
-            
           } );
+          
+          $(document).ready(function() {
+              $("#btn1").button().on("click", function(event) {
+                  alert("버튼1이 눌러졌습니다.");
+              });
+
+              $("#btn2").button().on("click", function(event) {
+                  alert("버튼2이 눌러졌습니다.");
+              });
+
+          });
 
         </script>
     </head>
     <body>
       <div class="widget">
         <h1>Widget Buttons</h1>
-        <button>A button element</button>
+        <button id="btn1">버튼1</button>
+        <button id="btn2">버튼2</button>
 
         <input type="submit" value="A submit button">
 
