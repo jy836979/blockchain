@@ -17,6 +17,9 @@
             } );
           } );
           
+          $('#button1').click(function(){
+            alert(1);          
+          });
           function button1() {
             alert(1);
           }
@@ -32,7 +35,7 @@
         <a href="#">An anchor</a>
       </div>
       <h1>CSS Buttons</h1>
-      <button class="ui-button ui-widget ui-corner-all" onclick="button1()">A button element</button>
+      <button class="ui-button ui-widget ui-corner-all" id="button1">A button element</button>
 
       <input class="ui-button ui-widget ui-corner-all" type="submit" value="A submit button">
 
