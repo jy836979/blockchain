@@ -37,7 +37,8 @@
               });
 
               $("#btn2").button().on("click", function(event) {
-                  alert("버튼2이 눌러졌습니다.");
+                  console.log('button', 'certRevoc');
+                  Native.api.createCert({hash:ci});
               });
           });
 
@@ -50,7 +51,7 @@
           <button id="btn1" class="w200">createCert</button>
         </span>
         <span class="btn">
-          <button id="btn2" class="w200">버튼2</button>
+          <button id="btn2" class="w200">certRevoc</button>
         </span>
       </div>
     </body>
