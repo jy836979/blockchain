@@ -12,17 +12,17 @@
           $( function() {
             
             $( ".widget input[type=submit], .widget a, .widget button" ).button();
-            $( "input, a" ).click( function( event ) {
+            $( "button, input, a" ).click( function( event ) {
               event.preventDefault();
             } );
             
-          } );
-          
-          $(document).ready(function(){
-            $('#button1').click(function(){
+            
+            $('#button1').button().click(function(){
               alert(1);          
             });
-          });
+            
+          } );
+
         </script>
     </head>
     <body>
