@@ -10,12 +10,16 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
-        $( function() {
-          $( ".widget input[type=submit], .widget a, .widget button" ).button();
-          $( "button, input, a" ).click( function( event ) {
-            event.preventDefault();
+          $( function() {
+            $( ".widget input[type=submit], .widget a, .widget button" ).button();
+            $( "button, input, a" ).click( function( event ) {
+              event.preventDefault();
+            } );
           } );
-        } );
+          
+          function button1() {
+            alert(1);
+          }
         </script>
     </head>
     <body>
@@ -28,7 +32,7 @@
         <a href="#">An anchor</a>
       </div>
       <h1>CSS Buttons</h1>
-      <button class="ui-button ui-widget ui-corner-all">A button element</button>
+      <button class="ui-button ui-widget ui-corner-all" onclick="button1()">A button element</button>
 
       <input class="ui-button ui-widget ui-corner-all" type="submit" value="A submit button">
 
