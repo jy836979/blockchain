@@ -11,6 +11,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="/blockchain/js/handle.js"></script>
         <script>
+          var ci = 'Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==';
           $( function() {
             
             $( ".widget input[type=submit], .widget a, .widget button" ).button();
@@ -20,15 +21,24 @@
             
           } );
           
+          function init() {
+            Native.event.registHAuthSuccess(function(result) {
+              alert('[success] '+JSON.stringify(result));
+            });
+            Native.event.registHAuthError(function(result) {
+              alert('[error] '+JSON.stringify(result));
+            });
+          }
+          
           $(document).ready(function() {
               $("#btn1").button().on("click", function(event) {
-                  alert("버튼1이 눌러졌습니다.");
+                  console.log('button', 'createCert');
+                  Native.api.createCert({name:'서*영', hash:ci});
               });
 
               $("#btn2").button().on("click", function(event) {
                   alert("버튼2이 눌러졌습니다.");
               });
-
           });
 
         </script>
@@ -37,7 +47,7 @@
       <div class="widget">
         <h1>Widget Buttons</h1>
         <span class="btn">
-          <button id="btn1" class="w200">버튼1</button>
+          <button id="btn1" class="w200">createCert</button>
         </span>
         <span class="btn">
           <button id="btn2" class="w200">버튼2</button>
