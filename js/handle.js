@@ -1159,6 +1159,36 @@ Native.prototype.api.certMngAddPattern = function(params) {
 	}
 };
 
+/**
+ * 인증서폐기
+ * @param hash ci [필수]
+ */ 
+Native.prototype.api.certRevoc = function(params) {
+	var options = {
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.certRevoc(options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		// var message = {
+		// 		command: 'passwordCheck',
+		// 		value: options.data,
+		// 		successCallback: 'Native.callback.passwordCheckSuccess',
+		// 		errorCallback: 'Native.callback.passwordCheckError'
+		// };
+		// window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+
 Native.prototype.event.registHAuthSuccess = function(fn) {
 	if(typeof fn != 'function') {
 		console.error('Not is function');
