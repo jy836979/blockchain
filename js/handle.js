@@ -1207,6 +1207,143 @@ Native.prototype.event.registHAuthError = function(fn) {
 };
 Native.prototype.callback.HAuthErrorCallback = function(){};
 
+/**
+ * 인증서 블록체인 아이디 조회
+ * callback result {
+ *     code {Number}: 0	// 성공 여부 코드
+ *     result {Number}: 0 // 블록체인 결과
+ * }
+ * @param {callback} success(result)
+ * @param {callback} error(result)
+ */
+Native.prototype.api.getBcID = function(params) {
+	var options = {
+		data: "",
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getBcIDSuccess = options.success;
+	Native.callback.getBcIDError = options.error;
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				value: options.data,
+				successCallback: 'Native.callback.getBcIDSuccess',
+				errorCallback: 'Native.callback.getBcIDError'
+		};
+		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'getBcID',
+				value: options.data,
+				successCallback: 'Native.callback.getBcIDSuccess',
+				errorCallback: 'Native.callback.getBcIDError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getBcIDSuccess = function(){};
+Native.prototype.callback.getBcIDError = function(){};
+
+/**
+ * 추가 인증수단 조회
+ * callback result {
+ *     code {Number}: 0	// 조회 성공 여부
+ *     result {Number}: 1 // 조회 결과(1: 지문, 2:패턴)
+ * }
+ * @param {callback} success(result)
+ * @param {callback} error(result)
+ */
+Native.prototype.api.getAuthType = function() {
+	var options = {
+		data: "",
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getAuthTypeSuccess = options.success;
+	Native.callback.getAuthTypeError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				value: options.data,
+				successCallback: 'Native.callback.getAuthTypeSuccess',
+				errorCallback: 'Native.callback.getAuthTypeError'
+		};
+		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'getAuthType',
+				value: options.data,
+				successCallback: 'Native.callback.getAuthTypeSuccess',
+				errorCallback: 'Native.callback.getAuthTypeError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getAuthTypeSuccess = function(){};
+Native.prototype.callback.getAuthTypeError = function(){};
+
+/**
+ * 추가 인증수단 삭제
+ * callback result {
+ *     code {Number}: 0	// 성공 : 0, 실패 : 에러코드
+ * }
+ * @param {callback} success(result)
+ * @param {callback} error(result)
+ */
+Native.prototype.api.deleteAuthType = function() {
+	var options = {
+		data: "",
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.deleteAuthTypeSuccess = options.success;
+	Native.callback.deleteAuthTypeError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				value: options.data,
+				successCallback: 'Native.callback.deleteAuthTypeSuccess',
+				errorCallback: 'Native.callback.deleteAuthTypeError'
+		};
+		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'deleteAuthType',
+				value: options.data,
+				successCallback: 'Native.callback.deleteAuthTypeSuccess',
+				errorCallback: 'Native.callback.deleteAuthTypeError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.deleteAuthTypeSuccess = function(){};
+Native.prototype.callback.deleteAuthTypeError = function(){};
+
 //##################################################################
 
 window.Native = new Native();
