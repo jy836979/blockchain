@@ -1233,7 +1233,7 @@ Native.prototype.api.getBcID = function(params) {
 				successCallback: 'Native.callback.getBcIDSuccess',
 				errorCallback: 'Native.callback.getBcIDError'
 		};
-		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+		window.ScriptInterface.getBcID(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1279,7 +1279,7 @@ Native.prototype.api.getAuthType = function(params) {
 				successCallback: 'Native.callback.getAuthTypeSuccess',
 				errorCallback: 'Native.callback.getAuthTypeError'
 		};
-		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+		window.ScriptInterface.getAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1324,7 +1324,7 @@ Native.prototype.api.deleteAuthType = function(params) {
 				successCallback: 'Native.callback.deleteAuthTypeSuccess',
 				errorCallback: 'Native.callback.deleteAuthTypeError'
 		};
-		window.ScriptInterface.passwordCheck(JSON.stringify(message));
+		window.ScriptInterface.deleteAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
