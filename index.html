@@ -74,6 +74,11 @@
                     }
                   });
               });
+              
+              $("#btn6").button().on("click", function(event) {
+                  console.log('button', 'certAuth');
+                  Native.api.certAuth({hash:ci});
+              });
             
               init();
           });
@@ -97,6 +102,9 @@
         </span>
         <span class="btn">
           <button id="btn5" class="w200">deleteAuthType</button>
+        </span>
+        <span class="btn">
+          <button id="btn6" class="w200">certAuth</button>
         </span>
       </div>
     </body>
