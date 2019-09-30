@@ -1262,7 +1262,7 @@ Native.prototype.callback.getBcIDError = function(){};
  * @param {callback} success(result)
  * @param {callback} error(result)
  */
-Native.prototype.api.getAuthType = function() {
+Native.prototype.api.getAuthType = function(params) {
 	var options = {
 		data: "",
 		success: function(result){},
@@ -1307,7 +1307,7 @@ Native.prototype.callback.getAuthTypeError = function(){};
  * @param {callback} success(result)
  * @param {callback} error(result)
  */
-Native.prototype.api.deleteAuthType = function() {
+Native.prototype.api.deleteAuthType = function(params) {
 	var options = {
 		data: "",
 		success: function(result){},
