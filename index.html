@@ -40,6 +40,40 @@
                   console.log('button', 'certRevoc');
                   Native.api.certRevoc({hash:ci});
               });
+
+              $("#btn3").button().on("click", function(event) {
+                  console.log('button', 'getBcID');
+                  Native.api.getBcID({
+                    success: function(result){
+                      alert("[성공] "+JSON.stringify(result));
+                    },
+                    error: function(result){
+                      alert("[실패] "+JSON.stringify(result));
+                    }
+                  });
+              });
+              $("#btn4").button().on("click", function(event) {
+                  console.log('button', 'getAuthType');
+                  Native.api.getAuthType({
+                    success: function(result){
+                      alert("[성공] "+JSON.stringify(result));
+                    },
+                    error: function(result){
+                      alert("[실패] "+JSON.stringify(result));
+                    }
+                  });
+              });
+              $("#btn5").button().on("click", function(event) {
+                  console.log('button', 'deleteAuthType');
+                  Native.api.deleteAuthType({
+                    success: function(result){
+                      alert("[성공] "+JSON.stringify(result));
+                    },
+                    error: function(result){
+                      alert("[실패] "+JSON.stringify(result));
+                    }
+                  });
+              });
             
               init();
           });
@@ -54,6 +88,15 @@
         </span>
         <span class="btn">
           <button id="btn2" class="w200">certRevoc</button>
+        </span>
+        <span class="btn">
+          <button id="btn3" class="w200">getBcID</button>
+        </span>
+        <span class="btn">
+          <button id="btn4" class="w200">getAuthType</button>
+        </span>
+        <span class="btn">
+          <button id="btn5" class="w200">deleteAuthType</button>
         </span>
       </div>
     </body>
