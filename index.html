@@ -80,6 +80,21 @@
                   Native.api.certAuth({hash:ci});
               });
             
+              $("#btn7").button().on("click", function(event) {
+                  console.log('button', 'multiAuthPush');
+                  Native.api.multiAuthPush({hash:ci, pushValue:'PUSH_VALUE'});
+              });
+
+              $("#btn8").button().on("click", function(event) {
+                  console.log('button', 'multiAuthQR');
+                  Native.api.multiAuthQR({hash:ci});
+              });
+            
+              $("#btn9").button().on("click", function(event) {
+                  console.log('button', 'multiAuthNumber');
+                  Native.api.multiAuthNumber({hash:ci});
+              });
+            
               init();
           });
 
@@ -105,6 +120,15 @@
         </span>
         <span class="btn">
           <button id="btn6" class="w200">certAuth</button>
+        </span>
+        <span class="btn">
+          <button id="btn7" class="w200">multiAuthPush</button>
+        </span>
+        <span class="btn">
+          <button id="btn8" class="w200">multiAuthQR</button>
+        </span>
+        <span class="btn">
+          <button id="btn9" class="w200">multiAuthNumber</button>
         </span>
       </div>
     </body>
