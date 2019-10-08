@@ -1160,6 +1160,98 @@ Native.prototype.api.certMngAddPattern = function(params) {
 };
 
 /**
+ * 멀티인증(PC로그인) - 푸시 인증
+ * @param hash ci [필수]
+ * @param pushValue sync data [선택]
+ */ 
+Native.prototype.api.multiAuthPush = function(params) {
+	var options = {
+			hash: "",
+			pushValue
+	};
+	$.extend(options, params? params : {});
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.multiAuthPush(options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		// var message = {
+		// 		command: 'passwordCheck',
+		// 		value: options.data,
+		// 		successCallback: 'Native.callback.passwordCheckSuccess',
+		// 		errorCallback: 'Native.callback.passwordCheckError'
+		// };
+		// window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+
+/**
+ * 멀티인증(PC로그인) - QR 인증
+ * @param hash ci [필수]
+ */ 
+Native.prototype.api.multiAuthQR = function(params) {
+	var options = {
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.multiAuthQR(options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		// var message = {
+		// 		command: 'passwordCheck',
+		// 		value: options.data,
+		// 		successCallback: 'Native.callback.passwordCheckSuccess',
+		// 		errorCallback: 'Native.callback.passwordCheckError'
+		// };
+		// window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+
+/**
+ * 멀티인증(PC로그인) - 인증번호 인증
+ * @param hash ci [필수]
+ */ 
+Native.prototype.api.multiAuthNumber = function(params) {
+	var options = {
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.multiAuthNumber(options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		// var message = {
+		// 		command: 'passwordCheck',
+		// 		value: options.data,
+		// 		successCallback: 'Native.callback.passwordCheckSuccess',
+		// 		errorCallback: 'Native.callback.passwordCheckError'
+		// };
+		// window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+
+/**
  * 인증서폐기
  * @param hash ci [필수]
  */ 
