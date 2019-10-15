@@ -1251,16 +1251,17 @@ Native.prototype.api.multiAuthNumber = function(params) {
 	}
 };
 
+
 /**
  * 인증서폐기
  * @param hash ci [필수]
- */ 
+ */
 Native.prototype.api.certRevoc = function(params) {
 	var options = {
 			hash: ""
 	};
 	$.extend(options, params? params : {});
-	
+
 	if (window.ScriptInterface) {
 		// Call Android interface
 		window.ScriptInterface.certRevoc(options.hash);
@@ -1303,7 +1304,7 @@ Native.prototype.callback.HAuthErrorCallback = function(){};
  * 인증서 블록체인 아이디 조회
  * callback result {
  *     code {Number}: 0	// 성공 여부 코드
- *     result {Number}: 0 // 블록체인 결과
+ *     result {String}: ""// 블록체인 결과(bcID)
  * }
  * @param {callback} success(result)
  * @param {callback} error(result)
@@ -1317,7 +1318,7 @@ Native.prototype.api.getBcID = function(params) {
 	$.extend(options, params? params : {});
 	Native.callback.getBcIDSuccess = options.success;
 	Native.callback.getBcIDError = options.error;
-	
+
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = {
@@ -1435,6 +1436,52 @@ Native.prototype.api.deleteAuthType = function(params) {
 }
 Native.prototype.callback.deleteAuthTypeSuccess = function(){};
 Native.prototype.callback.deleteAuthTypeError = function(){};
+
+/**
+ * 알파 테스트 버전조회
+ * callback result {
+ *     version {String}: V1	// V1 or V2 or empty string
+ * }
+ * @param {callback} success(result)
+ * @param {callback} error(result)
+ */
+Native.prototype.api.getAlpaVersion = function(params) {
+	var options = {
+		data: "",
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.deleteAuthTypeSuccess = options.success;
+	Native.callback.deleteAuthTypeError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				value: options.data,
+				successCallback: 'Native.callback.getAlpaVersionSuccess',
+				errorCallback: 'Native.callback.getAlpaVersionError'
+		};
+		window.ScriptInterface.getAlpaVersion(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		// var message = {
+		// 		command: 'deleteAuthType',
+		// 		value: options.data,
+		// 		successCallback: 'Native.callback.getAlpaVersionSuccess',
+		// 		errorCallback: 'Native.callback.getAlpaVersionError'
+		// };
+		// window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getAlpaVersionSuccess = function(){};
+Native.prototype.callback.getAlpaVersionError = function(){};
+
 
 //##################################################################
 
