@@ -95,6 +95,19 @@
                   Native.api.multiAuthNumber({hash:ci});
               });
             
+              $("#btn9").button().on("click", function(event) {
+                  console.log('button', 'getAlpaVersion');
+                  Native.api.getAlpaVersion({
+                    success: function(result){
+                      alert("[성공] "+JSON.stringify(result));
+                    },
+                    error: function(result){
+                      alert("[실패] "+JSON.stringify(result));
+                    }
+                  });
+              });
+            
+            
               init();
           });
 
@@ -129,6 +142,9 @@
         </span>
         <span class="btn">
           <button id="btn9" class="w200">multiAuthNumber</button>
+        </span>
+        <span class="btn">
+          <button id="btn10" class="w200">getAlpaVersion</button>
         </span>
       </div>
     </body>
