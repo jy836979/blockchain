@@ -1452,8 +1452,8 @@ Native.prototype.api.getAlpaVersion = function(params) {
 		error: function(result){console.error(result)}
 	};
 	$.extend(options, params? params : {});
-	Native.callback.deleteAuthTypeSuccess = options.success;
-	Native.callback.deleteAuthTypeError = options.error;
+	Native.callback.getAlpaVersionSuccess = options.success;
+	Native.callback.getAlpaVersionError = options.error;
 
 	if (window.ScriptInterface) {
 		// Call Android interface
