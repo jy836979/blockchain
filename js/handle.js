@@ -977,11 +977,15 @@ Native.prototype.api.mainPageLeave = function() {
  * 인증서발급
  * @param name 사용자명(예: 서*영) [선택]
  * @param hash ci [필수]
+ * @param deviceNo 휴대폰 번호(etcInfo) [선택]
+ * @param eMail 메일 주소(etcInfo) [선택]
  */ 
 Native.prototype.api.createCert = function(params) {
 	var options = {
 			name: "",
-			hash: ""
+			hash: "",
+			deviceNo: "",
+			eMail: ""
 	};
 	$.extend(options, params? params : {});
 	
