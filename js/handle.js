@@ -991,7 +991,7 @@ Native.prototype.api.createCert = function(params) {
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.createCert(options.name, options.hash);
+		window.ScriptInterface.createCert(options.name, options.hash, options.deviceNo, options.eMail);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
