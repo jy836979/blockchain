@@ -107,6 +107,22 @@
                   });
               });
             
+              $("#btn11").button().on("click", function(event) {
+                  console.log('button', 'certMngCheck');
+                  Native.api.certMngCheck({hash:ci});
+              });
+              $("#btn12").button().on("click", function(event) {
+                  console.log('button', 'certMngResetPwd');
+                  Native.api.certMngResetPwd({hash:ci});
+              });
+              $("#btn13").button().on("click", function(event) {
+                  console.log('button', 'certMngAddFinger');
+                  Native.api.certMngAddFinger({hash:ci});
+              });
+              $("#btn14").button().on("click", function(event) {
+                  console.log('button', 'certMngAddPattern');
+                  Native.api.certMngAddPattern({hash:ci});
+              });
             
               init();
           });
@@ -117,31 +133,48 @@
       <div class="widget">
         <h1>Widget Buttons</h1>
         <span class="btn">
-          <button id="btn1" class="w200">createCert</button>
+          <button id="btn1" class="w200">인증서발급</button>
         </span>
         <span class="btn">
-          <button id="btn2" class="w200">certRevoc</button>
+          <button id="btn6" class="w200">인증서인증</button>
+        </span>
+        
+        <span class="btn">
+          <button id="btn11" class="w200">인증서관리-인증서 체크</button>
         </span>
         <span class="btn">
-          <button id="btn3" class="w200">getBcID</button>
+          <button id="btn12" class="w200">비밀번호 재설정</button>
         </span>
         <span class="btn">
-          <button id="btn4" class="w200">getAuthType</button>
+          <button id="btn13" class="w200">지문 설정 추가</button>
         </span>
         <span class="btn">
-          <button id="btn5" class="w200">deleteAuthType</button>
+          <button id="btn14" class="w200">인증서관리-패턴 설정 추가</button>
+        </span>
+        
+        
+        <span class="btn">
+          <button id="btn7" class="w200">멀티인증(푸시)</button>
         </span>
         <span class="btn">
-          <button id="btn6" class="w200">certAuth</button>
+          <button id="btn8" class="w200">멀티인증(QR)</button>
         </span>
         <span class="btn">
-          <button id="btn7" class="w200">multiAuthPush</button>
+          <button id="btn9" class="w200">멀티인증(인증번호)</button>
+        </span>
+        
+        <span class="btn">
+          <button id="btn2" class="w200">인증서폐기</button>
+        </span>
+        
+        <span class="btn">
+          <button id="btn3" class="w200">인증서 블록체인 아이디 조회</button>
         </span>
         <span class="btn">
-          <button id="btn8" class="w200">multiAuthQR</button>
+          <button id="btn4" class="w200">추가 인증수단 조회</button>
         </span>
         <span class="btn">
-          <button id="btn9" class="w200">multiAuthNumber</button>
+          <button id="btn5" class="w200">추가 인증수단 삭제</button>
         </span>
         <span class="btn">
           <button id="btn10" class="w200">getAlpaVersion</button>
