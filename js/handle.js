@@ -1034,7 +1034,7 @@ Native.prototype.api.certAuth = function(params) {
 };
 
 /**
- * 인증서관리 - 체크
+ * 인증서관리 - 인증서 체크
  * @param hash ci [필수]
  */ 
 Native.prototype.api.certMngCheck = function(params) {
@@ -1141,7 +1141,7 @@ Native.prototype.api.certMngAddPattern = function(params) {
 Native.prototype.api.multiAuthPush = function(params) {
 	var options = {
 			hash: "",
-			pushValue
+			pushValue: ""
 	};
 	$.extend(options, params? params : {});
 	
@@ -1269,6 +1269,7 @@ Native.prototype.api.getBcID = function(params) {
 		error: function(result){console.error(result)}
 	};
 	var callback = { 
+		success: "", error: "",
 		successCallback: 'Native.callback.getBcIDSuccess',
 		errorCallback: 'Native.callback.getBcIDError' 
 	};
@@ -1308,7 +1309,8 @@ Native.prototype.api.getAuthType = function(params) {
 		success: function(result){},
 		error: function(result){console.error(result)}
 	};
-	var callback = { 
+	var callback = {
+		success: "", error: "",
 		successCallback: 'Native.callback.getAuthTypeSuccess',
 		errorCallback: 'Native.callback.getAuthTypeError'
 	};
@@ -1348,6 +1350,7 @@ Native.prototype.api.deleteAuthType = function(params) {
 		error: function(result){console.error(result)}
 	};
 	var callback = {
+		success: "", error: "",
 		successCallback: 'Native.callback.deleteAuthTypeSuccess',
 		errorCallback: 'Native.callback.deleteAuthTypeError'
 	};
@@ -1387,6 +1390,7 @@ Native.prototype.api.getAlpaVersion = function(params) {
 		error: function(result){console.error(result)}
 	};
 	var callback = {
+		success: "", error: "",
 		successCallback: 'Native.callback.getAlpaVersionSuccess',
 		errorCallback: 'Native.callback.getAlpaVersionError'
 	};
