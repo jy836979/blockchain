@@ -996,13 +996,8 @@ Native.prototype.api.createCert = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "createCert", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1030,13 +1025,8 @@ Native.prototype.api.certAuth = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certAuth", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1060,13 +1050,8 @@ Native.prototype.api.certMngCheck = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certMngCheck", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1090,13 +1075,8 @@ Native.prototype.api.certMngResetPwd = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certMngResetPwd", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1120,13 +1100,8 @@ Native.prototype.api.certMngAddFinger = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certMngAddFinger", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1150,13 +1125,8 @@ Native.prototype.api.certMngAddPattern = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certMngAddPattern", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1182,13 +1152,8 @@ Native.prototype.api.multiAuthPush = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "multiAuthPush", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1212,13 +1177,8 @@ Native.prototype.api.multiAuthQR = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "multiAuthQR", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1242,13 +1202,8 @@ Native.prototype.api.multiAuthNumber = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "multiAuthNumber", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1273,13 +1228,8 @@ Native.prototype.api.certRevoc = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'passwordCheck',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.passwordCheckSuccess',
-		// 		errorCallback: 'Native.callback.passwordCheckError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = { command: "certRevoc", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
@@ -1315,9 +1265,12 @@ Native.prototype.callback.HAuthErrorCallback = function(){};
  */
 Native.prototype.api.getBcID = function(params) {
 	var options = {
-		data: "",
 		success: function(result){},
 		error: function(result){console.error(result)}
+	};
+	var callback = { 
+		successCallback: 'Native.callback.getBcIDSuccess',
+		errorCallback: 'Native.callback.getBcIDError' 
 	};
 	$.extend(options, params? params : {});
 	Native.callback.getBcIDSuccess = options.success;
@@ -1325,22 +1278,13 @@ Native.prototype.api.getBcID = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = {
-				value: options.data,
-				successCallback: 'Native.callback.getBcIDSuccess',
-				errorCallback: 'Native.callback.getBcIDError'
-		};
+		var message = { ...options, ...callback };
 		window.ScriptInterface.getBcID(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = {
-				command: 'getBcID',
-				value: options.data,
-				successCallback: 'Native.callback.getBcIDSuccess',
-				errorCallback: 'Native.callback.getBcIDError'
-		};
+		var message = { command: "getBcID", ...options, ...callback };
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1361,9 +1305,12 @@ Native.prototype.callback.getBcIDError = function(){};
  */
 Native.prototype.api.getAuthType = function(params) {
 	var options = {
-		data: "",
 		success: function(result){},
 		error: function(result){console.error(result)}
+	};
+	var callback = { 
+		successCallback: 'Native.callback.getAuthTypeSuccess',
+		errorCallback: 'Native.callback.getAuthTypeError'
 	};
 	$.extend(options, params? params : {});
 	Native.callback.getAuthTypeSuccess = options.success;
@@ -1371,22 +1318,13 @@ Native.prototype.api.getAuthType = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = {
-				value: options.data,
-				successCallback: 'Native.callback.getAuthTypeSuccess',
-				errorCallback: 'Native.callback.getAuthTypeError'
-		};
+		var message = { ...options, ...callback };
 		window.ScriptInterface.getAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = {
-				command: 'getAuthType',
-				value: options.data,
-				successCallback: 'Native.callback.getAuthTypeSuccess',
-				errorCallback: 'Native.callback.getAuthTypeError'
-		};
+		var message = { command: "getAuthType", ...options, ...callback };
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1406,9 +1344,12 @@ Native.prototype.callback.getAuthTypeError = function(){};
  */
 Native.prototype.api.deleteAuthType = function(params) {
 	var options = {
-		data: "",
 		success: function(result){},
 		error: function(result){console.error(result)}
+	};
+	var callback = {
+		successCallback: 'Native.callback.deleteAuthTypeSuccess',
+		errorCallback: 'Native.callback.deleteAuthTypeError'
 	};
 	$.extend(options, params? params : {});
 	Native.callback.deleteAuthTypeSuccess = options.success;
@@ -1416,22 +1357,13 @@ Native.prototype.api.deleteAuthType = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = {
-				value: options.data,
-				successCallback: 'Native.callback.deleteAuthTypeSuccess',
-				errorCallback: 'Native.callback.deleteAuthTypeError'
-		};
+		var message = { ...options, ...callback };
 		window.ScriptInterface.deleteAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = {
-				command: 'deleteAuthType',
-				value: options.data,
-				successCallback: 'Native.callback.deleteAuthTypeSuccess',
-				errorCallback: 'Native.callback.deleteAuthTypeError'
-		};
+		var message = { command: "deleteAuthType", ...options, ...callback };
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1451,9 +1383,12 @@ Native.prototype.callback.deleteAuthTypeError = function(){};
  */
 Native.prototype.api.getAlpaVersion = function(params) {
 	var options = {
-		data: "",
 		success: function(result){},
 		error: function(result){console.error(result)}
+	};
+	var callback = {
+		successCallback: 'Native.callback.getAlpaVersionSuccess',
+		errorCallback: 'Native.callback.getAlpaVersionError'
 	};
 	$.extend(options, params? params : {});
 	Native.callback.getAlpaVersionSuccess = options.success;
@@ -1461,11 +1396,7 @@ Native.prototype.api.getAlpaVersion = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = {
-				value: options.data,
-				successCallback: 'Native.callback.getAlpaVersionSuccess',
-				errorCallback: 'Native.callback.getAlpaVersionError'
-		};
+		var message = { ...options, ...callback };
 		window.ScriptInterface.getAlpaVersion(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
