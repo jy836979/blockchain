@@ -1210,6 +1210,30 @@ Native.prototype.api.multiAuthNumber = function(params) {
 	}
 };
 
+/**
+ * 멀티인증(PC로그인) - 인증방법 선택화면
+ * @param hash ci [필수]
+ */ 
+Native.prototype.api.multiAuthSelect = function(params) {
+	var options = {
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.multiAuthSelect(options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = { command: "multiAuthSelect", ...options };
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
 
 /**
  * 인증서폐기
