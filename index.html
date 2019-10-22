@@ -95,6 +95,11 @@
                   Native.api.multiAuthNumber({hash:ci});
               });
             
+              $("#btn15").button().on("click", function(event) {
+                  console.log('button', 'multiAuthSelect');
+                  Native.api.multiAuthSelect({hash:ci});
+              });
+            
               $("#btn10").button().on("click", function(event) {
                   console.log('button', 'getAlpaVersion');
                   Native.api.getAlpaVersion({
@@ -161,6 +166,9 @@
         </span>
         <span class="btn">
           <button id="btn9" class="w200">멀티인증(인증번호)</button>
+        </span>
+        <span class="btn">
+          <button id="btn15" class="w200">멀티인증(선택화면)</button>
         </span>
         
         <span class="btn">
