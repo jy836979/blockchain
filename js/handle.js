@@ -996,7 +996,7 @@ Native.prototype.api.createCert = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "createCert", ...options };
+		var message = $.extend({ command: "createCert" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1025,7 +1025,7 @@ Native.prototype.api.certAuth = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certAuth", ...options };
+		var message = $.extend({ command: "certAuth" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1050,7 +1050,7 @@ Native.prototype.api.certMngCheck = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certMngCheck", ...options };
+		var message = $.extend({ command: "certMngCheck" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1075,7 +1075,7 @@ Native.prototype.api.certMngResetPwd = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certMngResetPwd", ...options };
+		var message = $.extend({ command: "certMngResetPwd" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1100,7 +1100,7 @@ Native.prototype.api.certMngAddFinger = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certMngAddFinger", ...options };
+		var message = $.extend({ command: "certMngAddFinger" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1125,7 +1125,7 @@ Native.prototype.api.certMngAddPattern = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certMngAddPattern", ...options };
+		var message = $.extend({ command: "certMngAddPattern" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1152,7 +1152,7 @@ Native.prototype.api.multiAuthPush = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "multiAuthPush", ...options };
+		var message = $.extend({ command: "multiAuthPush" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1177,7 +1177,7 @@ Native.prototype.api.multiAuthQR = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "multiAuthQR", ...options };
+		var message = $.extend({ command: "multiAuthQR" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1202,7 +1202,7 @@ Native.prototype.api.multiAuthNumber = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "multiAuthNumber", ...options };
+		var message = $.extend({ command: "multiAuthNumber" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1227,7 +1227,7 @@ Native.prototype.api.multiAuthSelect = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "multiAuthSelect", ...options };
+		var message = $.extend({ command: "multiAuthSelect" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1252,7 +1252,7 @@ Native.prototype.api.certRevoc = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "certRevoc", ...options };
+		var message = $.extend({ command: "certRevoc" }, options);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1303,13 +1303,13 @@ Native.prototype.api.getBcID = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = { ...options, ...callback };
+		var message = $.extend(options, callback);
 		window.ScriptInterface.getBcID(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "getBcID", ...options, ...callback };
+		var message = $.extend({ command: "getBcID" }, options, callback);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1344,13 +1344,13 @@ Native.prototype.api.getAuthType = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = { ...options, ...callback };
+		var message = $.extend(options, callback);
 		window.ScriptInterface.getAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "getAuthType", ...options, ...callback };
+		var message = $.extend({ command: "getAuthType" }, options, callback);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1384,13 +1384,13 @@ Native.prototype.api.deleteAuthType = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = { ...options, ...callback };
+		var message = $.extend(options, callback);
 		window.ScriptInterface.deleteAuthType(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = { command: "deleteAuthType", ...options, ...callback };
+		var message = $.extend({ command: "deleteAuthType" }, options, callback);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -1424,7 +1424,7 @@ Native.prototype.api.getAlpaVersion = function(params) {
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		var message = { ...options, ...callback };
+		var message = $.extend(options, callback);
 		window.ScriptInterface.getAlpaVersion(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
