@@ -975,6 +975,7 @@ Native.prototype.api.mainPageLeave = function() {
 
 /**
  * 인증서발급
+ * @processID CREATE_CERT
  * @param name 사용자명(예: 서*영) [선택]
  * @param hash ci [필수]
  * @param deviceNo 휴대폰 번호(etcInfo) [선택]
@@ -1006,6 +1007,7 @@ Native.prototype.api.createCert = function(params) {
 
 /**
  * 인증서인증
+ * @processID CERT_AUTH
  * @param name 사용자명(예: 서*영) [선택]
  * @param hash ci [필수]
  * @param oriDoc 거래시 시민카드 서버에서 생성한 원문 [선택]
@@ -1035,6 +1037,7 @@ Native.prototype.api.certAuth = function(params) {
 
 /**
  * 인증서관리 - 인증서 체크
+ * @processID CERT_MNG_CHECK
  * @param hash ci [필수]
  */ 
 Native.prototype.api.certMngCheck = function(params) {
@@ -1060,6 +1063,7 @@ Native.prototype.api.certMngCheck = function(params) {
 
 /**
  * 인증서관리 - 비밀번호 재설정
+ * @processID CERT_MNG_RESET_PWD
  * @param hash ci [필수]
  */ 
 Native.prototype.api.certMngResetPwd = function(params) {
@@ -1085,6 +1089,7 @@ Native.prototype.api.certMngResetPwd = function(params) {
 
 /**
  * 인증서관리 - 지문 설정 추가
+ * @processID CERT_MNG_ADD_FINGER
  * @param hash ci [필수]
  */ 
 Native.prototype.api.certMngAddFinger = function(params) {
@@ -1110,6 +1115,7 @@ Native.prototype.api.certMngAddFinger = function(params) {
 
 /**
  * 인증서관리 - 패턴 설정 추가
+ * @processID CERT_MNG_ADD_PATTERN
  * @param hash ci [필수]
  */ 
 Native.prototype.api.certMngAddPattern = function(params) {
@@ -1135,6 +1141,7 @@ Native.prototype.api.certMngAddPattern = function(params) {
 
 /**
  * 멀티인증(PC로그인) - 푸시 인증
+ * @processID MULTI_AUTH_PUSH
  * @param hash ci [필수]
  * @param pushValue sync data [선택]
  */ 
@@ -1162,6 +1169,7 @@ Native.prototype.api.multiAuthPush = function(params) {
 
 /**
  * 멀티인증(PC로그인) - QR 인증
+ * @processID MULTI_AUTH_QR
  * @param hash ci [필수]
  */ 
 Native.prototype.api.multiAuthQR = function(params) {
@@ -1187,6 +1195,7 @@ Native.prototype.api.multiAuthQR = function(params) {
 
 /**
  * 멀티인증(PC로그인) - 인증번호 인증
+ * @processID MULTI_AUTH_NUMBER
  * @param hash ci [필수]
  */ 
 Native.prototype.api.multiAuthNumber = function(params) {
@@ -1212,6 +1221,7 @@ Native.prototype.api.multiAuthNumber = function(params) {
 
 /**
  * 멀티인증(PC로그인) - 인증방법 선택화면
+ * @processID MULTI_AUTH_SELECT
  * @param hash ci [필수]
  */ 
 Native.prototype.api.multiAuthSelect = function(params) {
@@ -1237,6 +1247,7 @@ Native.prototype.api.multiAuthSelect = function(params) {
 
 /**
  * 인증서폐기
+ * @processID CERT_REVOC
  * @param hash ci [필수]
  */
 Native.prototype.api.certRevoc = function(params) {
