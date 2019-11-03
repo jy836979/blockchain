@@ -1147,7 +1147,7 @@ Native.prototype.api.multiAuthPush = function(params) {
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.multiAuthPush(options.hash);
+		window.ScriptInterface.multiAuthPush(options.hash, options.pushValue);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
