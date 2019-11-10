@@ -43,14 +43,14 @@
              $('#signup').click(function(){
                 console.log("signup");
                 
-                var memberInfo = memberInfo();
+                var params = memberInfo();
                 function success() {
                     console.log("signup.success");
                 }
                 function error(result) {
                     console.log("signup.error - "+result);
                 }
-                Native.api.signup($.extend(memberInfo, {success: success, error: error}));
+                Native.api.signup($.extend(params, {success: success, error: error}));
              });
               
           });
