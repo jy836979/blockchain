@@ -1456,6 +1456,42 @@ Native.prototype.api.getAlpaVersion = function(params) {
 Native.prototype.callback.getAlpaVersionSuccess = function(){};
 Native.prototype.callback.getAlpaVersionError = function(){};
 
+/**
+ * 회원가입
+ * @param hash ci [필수]
+ * @param userName 고객이름 [필수]
+ * @param birth 생년월일(yyyymmdd) [필수]
+ * @param phone 전화번호 [필수]
+ * @param {callback} success
+ * @param {callback} error
+ */
+Native.prototype.api.signup = function(params) {
+	var options = {
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = { success: "", error: "" };
+	$.extend(options, params? params : {});
+	Native.callback.signupSuccess = options.success;
+	Native.callback.signupError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getAlpaVersion(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "deleteAuthType" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.signupSuccess = function(){};
+Native.prototype.callback.signupError = function(){};
 
 //##################################################################
 
