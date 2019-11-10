@@ -1478,12 +1478,12 @@ Native.prototype.api.signup = function(params) {
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = $.extend(options, callback);
-		window.ScriptInterface.getAlpaVersion(JSON.stringify(message));
+		window.ScriptInterface.signup(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = $.extend({ command: "deleteAuthType" }, options, callback);
+		var message = $.extend({ command: "signup" }, options, callback);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
