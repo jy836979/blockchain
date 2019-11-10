@@ -21,19 +21,21 @@
             
           } );
           
-          function memberInfo(isMissMatch) {
+          function getMemberInfo(isMissMatch) {
             if(isMissMatch) {
                 var memberInfo = new Object();
                 memberInfo["hash"] = "Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==";
                 memberInfo["userName"] = "서재영2";
                 memberInfo["birth"] = "19871206";
                 memberInfo["phone"] = "01033548779";
+                return memberInfo;
             } else {
                 var memberInfo = new Object();
                 memberInfo["hash"] = "Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==";
                 memberInfo["userName"] = "서재영";
                 memberInfo["birth"] = "19871205";
                 memberInfo["phone"] = "01033548778";
+                return memberInfo;
             }
           }
             
@@ -43,7 +45,7 @@
              $('#signup').click(function(){
                 console.log("signup");
                 
-                var params = memberInfo();
+                var params = getMemberInfo();
                 function success() {
                     console.log("signup.success");
                 }
