@@ -50,7 +50,7 @@
                     console.log("signup.success");
                 }
                 function error(result) {
-                    console.log("signup.error - "+result);
+                    console.log("signup.error "+result);
                 }
                 Native.api.signup($.extend(params, {success: success, error: error}));
              });
