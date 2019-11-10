@@ -21,14 +21,48 @@
             
           } );
           
+          function memberInfo(isMissMatch) {
+            if(isMissMatch) {
+                var memberInfo = new Object();
+                memberInfo["hash"] = "Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==";
+                memberInfo["userName"] = "서재영2";
+                memberInfo["birth"] = "19871206";
+                memberInfo["phone"] = "01033548779";
+            } else {
+                var memberInfo = new Object();
+                memberInfo["hash"] = "Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==";
+                memberInfo["userName"] = "서재영";
+                memberInfo["birth"] = "19871205";
+                memberInfo["phone"] = "01033548778";
+            }
+          }
+            
+            
           $(document).ready(function() {
              
+             $('#signup').click(function(){
+                console.log("signup");
+                
+                var memberInfo = memberInfo();
+                function success() {
+                    console.log("signup.success");
+                }
+                function error(result) {
+                    console.log("signup.error - "+result);
+                }
+                Native.api.signup($.extend(memberInfo, {success: success, error: error}));
+             });
+              
           });
         </script>
     </head>
     <body>
       <div class="widget">
         <h1>앱투앱 인증</h1>
+          
+        <span class="btn">
+          <button id="signup" class="w200">인증서발급</button>
+        </span>
 
       </div>
     </body>
