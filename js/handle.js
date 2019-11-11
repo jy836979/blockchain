@@ -1441,13 +1441,13 @@ Native.prototype.api.getAlpaVersion = function(params) {
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		// var message = {
-		// 		command: 'deleteAuthType',
-		// 		value: options.data,
-		// 		successCallback: 'Native.callback.getAlpaVersionSuccess',
-		// 		errorCallback: 'Native.callback.getAlpaVersionError'
-		// };
-		// window.webkit.messageHandlers.api.postMessage(message);
+		var message = {
+				command: 'getAlpaVersion',
+				value: options.data,
+				successCallback: 'Native.callback.getAlpaVersionSuccess',
+				errorCallback: 'Native.callback.getAlpaVersionError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
 		console.log("No native APIs found.");
