@@ -21,6 +21,11 @@
             
           } );
           
+          Native.event.notification(function(noti){
+            console.log('notification',noti);
+            alert(JSON.stringfy(noti));
+          });
+          
           function init() {
             Native.event.registHAuthSuccess(function(result) {
               alert('[success] '+JSON.stringify(result));
