@@ -1879,7 +1879,7 @@ Native.prototype.api.certRevocCorp = function(params) {
 /**
  * (법인) 통합인증 API 응답을 받기 위한 콜백 등록 - 성공
  * @return {String} processID 응답 구분을 위한 프로세스 아이디
- * @return {int} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
+ * @return {Number} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
  * @return {String} message 결과에 대한 메세지 
  * @return {Object} result 통합인증 API 결과값
  * @description
@@ -1898,7 +1898,7 @@ Native.prototype.callback.HAuthCorpSuccessCallback = function(){};
 /**
  * (법인) 통합인증 API 응답을 받기 위한 콜백 등록 - 실패
  * @return {String} processID 응답 구분을 위한 프로세스 아이디
- * @return {int} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
+ * @return {Number} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
  * @return {String} message 결과에 대한 메세지
  * @return {String} errorCode 통합인증 API 문서의 Appendix A(결과코드표) 참고
  * @return {String} systemMessage 통합인증 API 문서의 Appendix A(결과코드표) 참고
