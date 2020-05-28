@@ -62,7 +62,8 @@
 
           function selectAuthCert({bizrNo:bizNo, loginId, certId}) {
             cert = {name, bizNo, loginId, certId};
-            $('#certInfo').textContent("CERT : " + JSON.stringify(cert))
+            $('#certInfo').html("CERT : " + JSON.stringify(cert))
+            alert("인증서가 선택되었습니다.");
           }
           
           function init() {
