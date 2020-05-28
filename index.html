@@ -349,7 +349,7 @@
               $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
                   console.log('button', this.textContent);
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
-                  Native.api.multiAuthSelectCorp(cert);
+                  Native.api.deleteAuth(cert);
               });
 
 
