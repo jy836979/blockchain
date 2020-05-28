@@ -67,12 +67,16 @@
               else if (processID === 'CORP_POSSIBLE_CERT_LIST') {
                 const { businessUserInfoList } = resultData
                 let listHtml = "";
+
+                function selectCert({userName:name, bizrno:bizNo, loginId}) {
+                  Native.api.createCertCorp({name, bizNo, loginId, hash:ci})
+                }
+
                 businessUserInfoList.forEach(element => {
-                  listHtml += "<div>"
+                  listHtml += "<div onclick='selectCert("+JSON.stringify(element)+")'>" +
                     element.loginId + " | " +
                     element.userName + " | " +
-                    element.deviceNo + " | " +
-                  +"</div>"
+                    element.deviceNo + "</div>"
                 });
                 $("#dialogLayout .cantainer").html(listHtml)
                 $("#dialogLayout").dialog("open");
