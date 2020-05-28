@@ -311,6 +311,7 @@
               $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
                   function success(result) {
+                    alert(JSON.stringify(result))
                     console.log("====CORP_UNIT_CERT_LIST",JSON.stringify(result));
                   }
                   function error(result) {
