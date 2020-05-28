@@ -323,8 +323,8 @@
                     result.forEach(element => {
                       listHtml += "<div onclick='selectAuthCert("+JSON.stringify(element)+")'>" +
                         element.loginId + " | " +
-                        element.userName + " | " +
-                        element.deviceNo + "</div>"
+                        element.bizrNo + " | " +
+                        element.certId + "</div>"
                     });
                     $("#dialogLayout .cantainer").html(listHtml)
                     $("#dialogLayout").dialog("open");
