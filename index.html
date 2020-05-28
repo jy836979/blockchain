@@ -64,7 +64,9 @@
               const { processID, stepCode, message, result:resultData } = result;
 
               if (processID === 'CORP_CREATE_CERT') {}
-              else if (processID === 'CORP_CERT_AUTH') {}
+              else if (processID === 'CORP_CERT_AUTH') {
+
+              }
               else if (processID === 'CORP_CERT_MNG_CHECK') {}
               else if (processID === 'CORP_CERT_MNG_RESET_PWD') {}
               else if (processID === 'CORP_CERT_MNG_ADD_FINGER') {}
@@ -297,12 +299,7 @@
               $("#CORP_POSSIBLE_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
 
-                  // function success(result) {
-                  //   console.log("====CORP_POSSIBLE_CERT_LIST",result);
-                  // }
-                  // function error(result) {
-                  //   console.error("====CORP_POSSIBLE_CERT_LIST",result);
-                  // }
+                  
                   Native.api.possibleCertListCorp({name, hash: ci})
               });
 
@@ -313,7 +310,13 @@
 
               $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
-                
+                  function success(result) {
+                    console.log("====CORP_UNIT_CERT_LIST",result);
+                  }
+                  function error(result) {
+                    console.error("====CORP_UNIT_CERT_LIST",result);
+                  }
+                  Native.api.getCorpCertificateList({success, error})
               });
 
               $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
