@@ -48,10 +48,14 @@
             alert(JSON.stringify(noti));
           });
 
+
+          let params = {};
           
           function selectCert({userName:name, bizrno:bizNo, loginId}) {
-            Native.api.createCertCorp({name, bizNo, loginId, hash:ci})
-            $('#dialogLayout').dialog("close");
+            if(confirm("사업자용 인증서를 발급 받기 위해서는\n서울시 개인 본인인증이 필요합니다.\n진행하시겠습니까?")) {
+              params = {name, bizNo, loginId, hash:ci};
+              Native.api.certAuthBeforeIssueCorp(params)
+            }
           }
           
           function init() {
@@ -83,7 +87,12 @@
                 $("#dialogLayout .cantainer").html(listHtml)
                 $("#dialogLayout").dialog("open");
               }
-              else if (processID === 'CORP_CERT_AUTH_BEFORE_ISSUE') {}
+              else if (processID === 'CORP_CERT_AUTH_BEFORE_ISSUE') {
+                if(confirm("사업자용 인증서를 발급 받으시겠습니까?")) {
+                  Native.api.createCertCorp(params)
+                  $('#dialogLayout').dialog("close");
+                }
+              }
               
             });
             Native.event.registHAuthError(function(result) {
