@@ -50,12 +50,19 @@
 
 
           let params = {};
+
+          let cert = {};
           
           function selectCert({userName:name, bizrno:bizNo, loginId}) {
             if(confirm("사업자용 인증서를 발급 받기 위해서는\n서울시 개인 본인인증이 필요합니다.\n진행하시겠습니까?")) {
               params = {name, bizNo, loginId, hash:ci};
               Native.api.certAuthBeforeIssueCorp(params)
             }
+          }
+
+          function selectAuthCert({bizrNo:bizNo, loginId, certId}) {
+            cert = {name, bizNo, loginId, certId};
+            $('#certInfo').textContent("CERT : " + JSON.stringify(cert))
           }
           
           function init() {
@@ -65,7 +72,8 @@
 
               if (processID === 'CORP_CREATE_CERT') {}
               else if (processID === 'CORP_CERT_AUTH') {
-
+                if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                Native.api.certAuthCorp(cert);
               }
               else if (processID === 'CORP_CERT_MNG_CHECK') {}
               else if (processID === 'CORP_CERT_MNG_RESET_PWD') {}
@@ -311,11 +319,18 @@
               $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
                   function success(result) {
-                    alert(JSON.stringify(result))
-                    console.log("====CORP_UNIT_CERT_LIST",JSON.stringify(result));
+                    let listHtml = "";
+                    result.forEach(element => {
+                      listHtml += "<div onclick='selectAuthCert("+JSON.stringify(element)+")'>" +
+                        element.loginId + " | " +
+                        element.userName + " | " +
+                        element.deviceNo + "</div>"
+                    });
+                    $("#dialogLayout .cantainer").html(listHtml)
+                    $("#dialogLayout").dialog("open");
                   }
                   function error(result) {
-                    console.error("====CORP_UNIT_CERT_LIST",JSON.stringify(result));
+                    alert(JSON.stringify(result));
                   }
                   Native.api.getCorpCertificateList({success, error})
               });
@@ -350,6 +365,8 @@
           </style>
     </head>
     <body>
+
+      <div id="certInfo"></div>
 
       <div id="dialogLayout" title="인증서 발급 가능 목록">
         <div class="cantainer"></div>
