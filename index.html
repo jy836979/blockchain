@@ -1,16 +1,16 @@
-  
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>blockchain</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/blockchain/css/style.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="./blockchain/css/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="/blockchain/js/handle.js"></script>
+        <script src="./blockchain/js/handle.js"></script>
         <script>
+          var name = "서재영";
           var ci = 'Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==';
           $( function() {
             
@@ -18,7 +18,29 @@
             $( "button, input, a" ).click( function( event ) {
               event.preventDefault();
             } );
-            
+
+            $("#dialogLayout").dialog({
+                //이벤트발생시 open해주기 위하여 false 로 지정
+                autoOpen: false,
+                //다이얼로그의 넓이지정
+                resizable: false,
+                height: "auto",
+                modal: true,
+                width: '100%',
+                //버튼 설정
+                buttons: [{
+                        text: "확인",
+                        click: function() {
+                            $(this).dialog("close");
+                        }
+                },{
+                    text: "취소",
+                    click: function() {
+                        $(this).dialog("close");
+                    }
+                }]
+            });
+            $( "#certList" ).selectable();
           } );
           
           Native.event.registNotification(function(noti){
@@ -29,9 +51,40 @@
           function init() {
             Native.event.registHAuthSuccess(function(result) {
               alert('[success] '+JSON.stringify(result));
+              const { processID, stepCode, message, result:resultData } = result;
+
+              if (processID === 'CORP_CREATE_CERT') {}
+              else if (processID === 'CORP_CERT_AUTH') {}
+              else if (processID === 'CORP_CERT_MNG_CHECK') {}
+              else if (processID === 'CORP_CERT_MNG_RESET_PWD') {}
+              else if (processID === 'CORP_CERT_MNG_ADD_FINGER') {}
+              else if (processID === 'CORP_CERT_MNG_ADD_PATTERN') {}
+              else if (processID === 'CORP_MULTI_AUTH_PUSH') {}
+              else if (processID === 'CORP_MULTI_AUTH_QR') {}
+              else if (processID === 'CORP_MULTI_AUTH_NUMBER') {}
+              else if (processID === 'CORP_MULTI_AUTH_SELECT') {}
+              else if (processID === 'CORP_CERT_REVOC') {}
+              else if (processID === 'CORP_POSSIBLE_CERT_LIST') {}
+              else if (processID === 'CORP_CERT_AUTH_BEFORE_ISSUE') {}
+              
             });
             Native.event.registHAuthError(function(result) {
               alert('[error] '+JSON.stringify(result));
+              const { processID, stepCode, message, errorCode, systemMessage } = result;
+
+              if (processID === 'CORP_CREATE_CERT') {}
+              else if (processID === 'CORP_CERT_AUTH') {}
+              else if (processID === 'CORP_CERT_MNG_CHECK') {}
+              else if (processID === 'CORP_CERT_MNG_RESET_PWD') {}
+              else if (processID === 'CORP_CERT_MNG_ADD_FINGER') {}
+              else if (processID === 'CORP_CERT_MNG_ADD_PATTERN') {}
+              else if (processID === 'CORP_MULTI_AUTH_PUSH') {}
+              else if (processID === 'CORP_MULTI_AUTH_QR') {}
+              else if (processID === 'CORP_MULTI_AUTH_NUMBER') {}
+              else if (processID === 'CORP_MULTI_AUTH_SELECT') {}
+              else if (processID === 'CORP_CERT_REVOC') {}
+              else if (processID === 'CORP_POSSIBLE_CERT_LIST') {}
+              else if (processID === 'CORP_CERT_AUTH_BEFORE_ISSUE') {}
             });
           }
           function getMemberInfo(isMissMatch) {
@@ -164,12 +217,117 @@
                   Native.api.certMngAddPattern({hash:ci});
               });
             
+              
+              $("#CORP_CREATE_CERT").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              
+              $("#CORP_CERT_AUTH").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+              $("#CORP_CERT_MNG_CHECK").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_CERT_MNG_RESET_PWD").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_CERT_MNG_ADD_FINGER").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_CERT_MNG_ADD_PATTERN").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+              $("#CORP_MULTI_AUTH_PUSH").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_MULTI_AUTH_QR").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_MULTI_AUTH_NUMBER").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+              $("#CORP_MULTI_AUTH_SELECT").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+              $("#CORP_CERT_REVOC").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+              $("#CORP_POSSIBLE_CERT_LIST").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+                  // function success(result) {
+                  //   console.log("====CORP_POSSIBLE_CERT_LIST",result);
+                  // }
+                  // function error(result) {
+                  //   console.error("====CORP_POSSIBLE_CERT_LIST",result);
+                  // }
+                  Native.api.possibleCertListCorp({name, hash: ci})
+              });
+
+              $("#CORP_CERT_AUTH_BEFORE_ISSUE").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+              $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+                  $("#dialogLayout").dialog("open");
+                  event.preventDefault();
+              });
+
+              $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+
+              });
+
+
+              $("#btn_person").button().on("click", function() {
+                $('#layout_person').show()
+                $('#layout_corp').hide()
+              });
+
+              $("#btn_corp").button().on("click", function() {
+                $('#layout_person').hide()
+                $('#layout_corp').show()
+              });
+              
+
               init();
           });
 
         </script>
+        <style>
+          #feedback { font-size: 1.4em; }
+          #selectable .ui-selecting { background: #FECA40; }
+          #selectable .ui-selected { background: #F39814; color: white; }
+          #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+          #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+          </style>
     </head>
     <body>
+
+      <div id="dialogLayout" title="인증서 발급 가능 목록">
+          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
+          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
+          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
+          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>  
+      </div>
+
       <div class="widget">
         <h1>앱투앱인증</h1>
         <span class="btn">
@@ -177,56 +335,120 @@
         </span>
         
         <h1>인증서</h1>
+
         <span class="btn">
-          <button id="btn1" class="w200">인증서발급</button>
-        </span>
-        <span class="btn">
-          <button id="btn6" class="w200">인증서인증</button>
-        </span>
-        
-        <span class="btn">
-          <button id="btn11" class="w200">인증서관리-인증서 체크</button>
-        </span>
-        <span class="btn">
-          <button id="btn12" class="w200">비밀번호 재설정</button>
-        </span>
-        <span class="btn">
-          <button id="btn13" class="w200">지문 설정 추가</button>
-        </span>
-        <span class="btn">
-          <button id="btn14" class="w200">인증서관리-패턴 설정 추가</button>
+            <button id="btn_person" style="width:100px">개인</button>
+            <button id="btn_corp" style="width:100px">법인</button>
         </span>
         
-        
-        <span class="btn">
-          <button id="btn7" class="w200">멀티인증(푸시)</button>
-        </span>
-        <span class="btn">
-          <button id="btn8" class="w200">멀티인증(QR)</button>
-        </span>
-        <span class="btn">
-          <button id="btn9" class="w200">멀티인증(인증번호)</button>
-        </span>
-        <span class="btn">
-          <button id="btn15" class="w200">멀티인증(선택화면)</button>
-        </span>
-        
-        <span class="btn">
-          <button id="btn2" class="w200">인증서폐기</button>
-        </span>
-        
-        <span class="btn">
-          <button id="btn3" class="w200">인증서 블록체인 아이디 조회</button>
-        </span>
-        <span class="btn">
-          <button id="btn4" class="w200">추가 인증수단 조회</button>
-        </span>
-        <span class="btn">
-          <button id="btn5" class="w200">추가 인증수단 삭제</button>
-        </span>
-        <span class="btn">
-          <button id="btn10" class="w200">getAlpaVersion</button>
-        </span>
+        <div id="layout_person" style="display:none;">
+            <span class="btn">
+            <button id="btn1" class="w200">인증서발급</button>
+            </span>
+            <span class="btn">
+            <button id="btn6" class="w200">인증서인증</button>
+            </span>
+            
+            <span class="btn">
+            <button id="btn11" class="w200">인증서관리-인증서 체크</button>
+            </span>
+            <span class="btn">
+            <button id="btn12" class="w200">비밀번호 재설정</button>
+            </span>
+            <span class="btn">
+            <button id="btn13" class="w200">지문 설정 추가</button>
+            </span>
+            <span class="btn">
+            <button id="btn14" class="w200">인증서관리-패턴 설정 추가</button>
+            </span>
+            
+            
+            <span class="btn">
+            <button id="btn7" class="w200">멀티인증(푸시)</button>
+            </span>
+            <span class="btn">
+            <button id="btn8" class="w200">멀티인증(QR)</button>
+            </span>
+            <span class="btn">
+            <button id="btn9" class="w200">멀티인증(인증번호)</button>
+            </span>
+            <span class="btn">
+            <button id="btn15" class="w200">멀티인증(선택화면)</button>
+            </span>
+            
+            <span class="btn">
+            <button id="btn2" class="w200">인증서폐기</button>
+            </span>
+            
+            <span class="btn">
+            <button id="btn3" class="w200">인증서 블록체인 아이디 조회</button>
+            </span>
+            <span class="btn">
+            <button id="btn4" class="w200">추가 인증수단 조회</button>
+            </span>
+            <span class="btn">
+            <button id="btn5" class="w200">추가 인증수단 삭제</button>
+            </span>
+            <span class="btn">
+            <button id="btn10" class="w200">getAlpaVersion</button>
+            </span>
+        </div>
+
+        <div id="layout_corp">
+          <span class="btn">
+            <button id="CORP_CREATE_CERT" class="w200">(법인) 인증서발급</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_CERT_AUTH" class="w200">(법인) 인증서인증</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_CERT_MNG_CHECK" class="w200">(법인) 인증서관리 - 인증서 체크</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_CERT_MNG_RESET_PWD" class="w200">(법인) 인증서관리 - 비밀번호 재설정</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_CERT_MNG_ADD_FINGER" class="w200">(법인) 인증서관리 - 지문 설정 추가</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_CERT_MNG_ADD_PATTERN" class="w200">(법인) 인증서관리 - 패턴 설정 추가</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_MULTI_AUTH_PUSH" class="w200">(법인) 멀티인증(PC로그인) - 푸시 인증</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_MULTI_AUTH_QR" class="w200">(법인) 멀티인증(PC로그인) - QR 인증</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_MULTI_AUTH_NUMBER" class="w200">(법인) 멀티인증(PC로그인) - 인증번호 인증</button>
+          </span>
+          <span class="btn">
+            <button id="CORP_MULTI_AUTH_SELECT" class="w200">(법인) 멀티인증(PC로그인) - 인증방법 선택화면</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_CERT_REVOC" class="w200">(법인) 인증서폐기</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_POSSIBLE_CERT_LIST" class="w200">(법인) 인증서 발급 가능 목록</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_CERT_AUTH_BEFORE_ISSUE" class="w200">(법인) 인증서 발급전 인증서인증</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_UNIT_CERT_LIST" class="w200">(법인) 발급된 인증서 목록 조회</button>
+          </span>
+
+          <span class="btn">
+            <button id="CORP_UNIT_DELETE_AUTH" class="w200">(법인) 인증 타입 삭제</button>
+          </span>
+
+        </div>
       </div>
     </body>
 </html>
