@@ -1271,24 +1271,6 @@ Native.prototype.api.certRevoc = function(params) {
 	}
 };
 
-Native.prototype.event.registHAuthSuccess = function(fn) {
-	if(typeof fn != 'function') {
-		console.error('Not is function');
-		return;
-	}
-	Native.callback.HAuthSuccessCallback = fn;
-};
-Native.prototype.callback.HAuthSuccessCallback = function(){};
-
-Native.prototype.event.registHAuthError = function(fn) {
-	if(typeof fn != 'function') {
-		console.error('Not is function');
-		return;
-	}
-	Native.callback.HAuthErrorCallback = fn;
-};
-Native.prototype.callback.HAuthErrorCallback = function(){};
-
 /**
  * 인증서 블록체인 아이디 조회
  * callback result {
@@ -1501,33 +1483,27 @@ Native.prototype.callback.signupError = function(){};
 
 /**
  * (법인) 인증서발급
- * @processID CREATE_CERT
- * @param {String} name 사용자명(예: 서*영) [선택]
- * @param {String} hash ci [필수]
+ * @processID CORP_CREATE_CERT
+ * @param {String} name 사용자명(예: 서*영) [필수]
  * @param {String} bizNo 사업자 번호 [필수]
- * @param {String} certId 인증서 아이디 [필수]
  * @param {String} loginId 로그인 아이디 [필수]
- * @param {String} bsnesOriginHistSeq 원문 이력 순번 [필수]
- * @param {String} signDoc 서명 [필수]
+ * @param {String} hash ci [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.createCertCorp = function(params) {
 	var options = {
 			name: "",
-			hash: "",
 			bizNo: "",
-			certId: "",
 			loginId: "",
-			bsnesOriginHistSeq: "",
-			signDoc: ""
+			hash: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.createCertCorp(options.name, options.hash, options.bizNo, options.certId, options.loginId, options.bsnesOriginHistSeq, options.signDoc);
+		window.ScriptInterface.createCertCorp(options.name, options.bizNo, options.loginId, options.hash);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1542,27 +1518,29 @@ Native.prototype.api.createCertCorp = function(params) {
 
 /**
  * (법인) 인증서인증
- * @processID CERT_AUTH
- * @param {String} hash ci [필수]
- * @param {String} oriDoc 시민카드 서버에서 생성한 원문 [선택]
+ * @processID CORP_CERT_AUTH
+ * @param {String} name 사용자명(예: 서*영) [필수]
  * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
+ * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.certAuthCorp = function(params) {
 	var options = {
-			hash: "",
-			oriDoc: "",
+			name: "",
 			bizNo: "",
+			loginId: "",
+			hash: "",
 			certId: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certAuthCorp(options.hash, options.oriDoc, options.bizNo, options.certId);
+		window.ScriptInterface.certAuthCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1577,25 +1555,29 @@ Native.prototype.api.certAuthCorp = function(params) {
 
 /**
  * (법인) 인증서관리 - 인증서 체크
- * @processID CERT_MNG_CHECK
+ * @processID CORP_CERT_MNG_CHECK
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} bizNo 사업자 번호 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.certMngCheckCorp = function(params) {
 	var options = {
-		hash: "",
-		certId: "",
-		bizNo: ""
+			name: "",
+			bizNo: "",
+			loginId: "",
+			hash: "",
+			certId: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certMngCheckCorp(options.hash, options.certId, options.bizNo);
+		window.ScriptInterface.certMngCheckCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1610,15 +1592,21 @@ Native.prototype.api.certMngCheckCorp = function(params) {
 
 /**
  * (법인) 인증서관리 - 비밀번호 재설정
- * @processID CERT_MNG_RESET_PWD
+ * @processID CORP_CERT_MNG_RESET_PWD
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.certMngResetPwdCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
 			certId: ""
 	};
@@ -1626,7 +1614,7 @@ Native.prototype.api.certMngResetPwdCorp = function(params) {
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certMngResetPwdCorp(options.hash, options.certId);
+		window.ScriptInterface.certMngResetPwdCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1642,15 +1630,21 @@ Native.prototype.api.certMngResetPwdCorp = function(params) {
 
 /**
  * (법인) 인증서관리 - 지문 설정 추가
- * @processID CERT_MNG_ADD_FINGER
+ * @processID CORP_CERT_MNG_ADD_FINGER
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.certMngAddFingerCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
 			certId: ""
 	};
@@ -1658,7 +1652,7 @@ Native.prototype.api.certMngAddFingerCorp = function(params) {
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certMngAddFingerCorp(options.hash, options.certId);
+		window.ScriptInterface.certMngAddFingerCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1674,15 +1668,21 @@ Native.prototype.api.certMngAddFingerCorp = function(params) {
 
 /**
  * (법인) 인증서관리 - 패턴 설정 추가
- * @processID CERT_MNG_ADD_PATTERN
+ * @processID CORP_CERT_MNG_ADD_PATTERN
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.certMngAddPatternCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
 			certId: ""
 	};
@@ -1690,7 +1690,7 @@ Native.prototype.api.certMngAddPatternCorp = function(params) {
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certMngAddPatternCorp(options.hash, options.certId);
+		window.ScriptInterface.certMngAddPatternCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1706,27 +1706,31 @@ Native.prototype.api.certMngAddPatternCorp = function(params) {
 
 /**
  * (법인) 멀티인증(PC로그인) - 푸시 인증
- * @processID MULTI_AUTH_PUSH
+ * @processID CORP_MULTI_AUTH_PUSH
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} pushValue Push를 통해 받은 ENC DATA 값 [선택]
- * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} pushValue 푸시로 전달받은 EXT jsonObject 내부에 있는txId 값 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.multiAuthPushCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
 			certId: "",
-			pushValue: "",
-			bizNo: ""
+			pushValue: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.multiAuthPushCorp(options.hash, options.certId, options.pushValue, options.bizNo);
+		window.ScriptInterface.multiAuthPushCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId, options.pushValue);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1742,25 +1746,29 @@ Native.prototype.api.multiAuthPushCorp = function(params) {
 
 /**
  * (법인) 멀티인증(PC로그인) - QR 인증
- * @processID MULTI_AUTH_QR
+ * @processID CORP_MULTI_AUTH_QR
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} bizNo 사업자 번호 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.multiAuthQRCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
-			certId: "",
-			bizNo: ""
+			certId: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.multiAuthQRCorp(options.hash, options.certId, options.bizNo);
+		window.ScriptInterface.multiAuthQRCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1776,25 +1784,29 @@ Native.prototype.api.multiAuthQRCorp = function(params) {
 
 /**
  * (법인) 멀티인증(PC로그인) - 인증번호 인증
- * @processID MULTI_AUTH_NUMBER
+ * @processID CORP_MULTI_AUTH_NUMBER
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} bizNo 사업자 번호 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.multiAuthNumberCorp = function(params) {
 	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
 			hash: "",
-			certId: "",
-			bizNo: ""
+			certId: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.multiAuthNumberCorp(options.hash, options.certId, options.bizNo);
+		window.ScriptInterface.multiAuthNumberCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1810,25 +1822,29 @@ Native.prototype.api.multiAuthNumberCorp = function(params) {
 
 /**
  * (법인) 멀티인증(PC로그인) - 인증방법 선택화면
- * @processID MULTI_AUTH_SELECT
+ * @processID CORP_MULTI_AUTH_SELECT
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} bizNo 사업자 번호 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */ 
 Native.prototype.api.multiAuthSelectCorp = function(params) {
 	var options = {
-		hash: "",
-		certId: "",
-		bizNo: ""
+			name: "",
+			bizNo: "",
+			loginId: "",
+			hash: "",
+			certId: ""
 	};
 	$.extend(options, params? params : {});
 	
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.multiAuthSelectCorp(options.hash, options.certId, options.bizNo);
+		window.ScriptInterface.multiAuthSelectCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1844,25 +1860,29 @@ Native.prototype.api.multiAuthSelectCorp = function(params) {
 
 /**
  * (법인) 인증서폐기
- * @processID CERT_REVOC
+ * @processID CORP_CERT_REVOC
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
  * @param {String} hash ci [필수]
  * @param {String} certId 인증서 아이디 [필수]
- * @param {String} bizNo 사업자 번호 [필수]
  * @description 
- * 	- HAuthCorpSuccessCallback 성공 시 콜백 호출
- * 	- HAuthCorpErrorCallback 실패 시 콜백 호출
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
  */
 Native.prototype.api.certRevocCorp = function(params) {
 	var options = {
-		hash: "",
-		certId: "",
-		bizNo: ""
+			name: "",
+			bizNo: "",
+			loginId: "",
+			hash: "",
+			certId: ""
 	};
 	$.extend(options, params? params : {});
 
 	if (window.ScriptInterface) {
 		// Call Android interface
-		window.ScriptInterface.certRevocCorp(options.hash, options.certId, options.bizNo);
+		window.ScriptInterface.certRevocCorp(options.name, options.bizNo, options.loginId, options.hash, options.certId);
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
@@ -1875,45 +1895,187 @@ Native.prototype.api.certRevocCorp = function(params) {
 	}
 };
 
+/**
+ * (법인) 인증서 발급 가능 목록
+ * @processID CORP_POSSIBLE_CERT_LIST
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} hash ci [필수]
+ * @description 
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
+ */
+Native.prototype.api.possibleCertListCorp = function(params) {
+	var options = {
+			name: "",
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.possibleCertListCorp(options.name, options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "possibleCertListCorp" }, options);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
 
 /**
- * (법인) 통합인증 API 응답을 받기 위한 콜백 등록 - 성공
+ * (법인) 인증서 발급전 인증서인증
+ * @processID CORP_CERT_AUTH_BEFORE_ISSUE
+ * @param {String} name 사용자명(예: 서*영) [필수]
+ * @param {String} bizNo 사업자 번호 [필수]
+ * @param {String} loginId 로그인 아이디 [필수]
+ * @param {String} hash ci [필수]
+ * @description 
+ * 	- HAuthSuccessCallback 성공 시 콜백 호출
+ * 	- HAuthErrorCallback 실패 시 콜백 호출
+ */
+Native.prototype.api.certAuthBeforeIssueCorp = function(params) {
+	var options = {
+			name: "",
+			bizNo: "",
+			loginId: "",
+			hash: ""
+	};
+	$.extend(options, params? params : {});
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		window.ScriptInterface.certAuthBeforeIssueCorp(options.name, options.bizNo, options.loginId, options.hash);
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "certAuthBeforeIssueCorp" }, options);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+
+/**
+ * (법인) 발급된 인증서 목록 조회
+ * @return {Array} result success 콜백 파라미터, 발급된 인증서 목록 데이터
+ * @param {callback} success(result)
+ * @param {callback} error(result)
+ */
+Native.prototype.api.getCorpCertificateList = function(params) {
+	var options = {
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = {
+		success: "", error: "",
+		successCallback: 'Native.callback.getCorpCertificateListSuccess',
+		errorCallback: 'Native.callback.getCorpCertificateListError'
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getCorpCertificateListSuccess = options.success;
+	Native.callback.getCorpCertificateListError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getCorpCertificateList(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "getCorpCertificateList" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getCorpCertificateListSuccess = function(){};
+Native.prototype.callback.getCorpCertificateListError = function(){};
+
+/**
+ * (법인) 등록된 인증 타입을 삭제
+ * @param {String} certId 인증서 아이디 [필수]
+ * @param {callback} success(result) 성공
+ * @param {callback} error(result) 실패
+ */
+Native.prototype.api.deleteAuth = function(params) {
+	var options = {
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = {
+		success: "", error: "",
+		successCallback: 'Native.callback.deleteAuthSuccess',
+		errorCallback: 'Native.callback.deleteAuthError'
+	};
+	$.extend(options, params? params : {});
+	Native.callback.deleteAuthSuccess = options.success;
+	Native.callback.deleteAuthError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getCorpCertificateList(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "getCorpCertificateList" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.deleteAuthSuccess = function(){};
+Native.prototype.callback.deleteAuthError = function(){};
+
+
+/**
+ * 통합인증 API 응답을 받기 위한 콜백 등록 - 성공
  * @return {String} processID 응답 구분을 위한 프로세스 아이디
  * @return {Number} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
  * @return {String} message 결과에 대한 메세지 
  * @return {Object} result 통합인증 API 결과값
  * @description
- * 	document.ready 시점에 Native.event.registHAuthCorpSuccess(fn) 이벤트를 등록하면
- *  통합인증 API 요청 시 성공에 대한 HAuthCorpSuccessCallback 콜백을 받을 수 있습니다.
+ * 	document.ready 시점에 Native.event.registHAuthSuccess(fn) 이벤트를 등록하면
+ *  통합인증 API 요청 시 성공에 대한 HAuthSuccessCallback 콜백을 받을 수 있습니다.
  */
-Native.prototype.event.registHAuthCorpSuccess = function(fn) {
+Native.prototype.event.registHAuthSuccess = function(fn) {
 	if(typeof fn != 'function') {
 		console.error('Not is function');
 		return;
 	}
-	Native.callback.HAuthCorpSuccessCallback = fn;
+	Native.callback.HAuthSuccessCallback = fn;
 };
-Native.prototype.callback.HAuthCorpSuccessCallback = function(){};
+Native.prototype.callback.HAuthSuccessCallback = function(){};
 
 /**
- * (법인) 통합인증 API 응답을 받기 위한 콜백 등록 - 실패
+ * 통합인증 API 응답을 받기 위한 콜백 등록 - 실패
  * @return {String} processID 응답 구분을 위한 프로세스 아이디
  * @return {Number} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
  * @return {String} message 결과에 대한 메세지
  * @return {String} errorCode 통합인증 API 문서의 Appendix A(결과코드표) 참고
  * @return {String} systemMessage 통합인증 API 문서의 Appendix A(결과코드표) 참고
  * @description
- * 	document.ready 시점에 Native.event.registHAuthCorpError(fn) 이벤트를 등록하면
- *  통합인증 API 요청 시 실패에 대한 HAuthCorpErrorCallback 콜백을 받을 수 있습니다.
+ * 	document.ready 시점에 Native.event.registHAuthError(fn) 이벤트를 등록하면
+ *  통합인증 API 요청 시 실패에 대한 HAuthErrorCallback 콜백을 받을 수 있습니다.
  */
-Native.prototype.event.registHAuthCorpError = function(fn) {
+Native.prototype.event.registHAuthError = function(fn) {
 	if(typeof fn != 'function') {
 		console.error('Not is function');
 		return;
 	}
-	Native.callback.HAuthCorpErrorCallback = fn;
+	Native.callback.HAuthErrorCallback = fn;
 };
-Native.prototype.callback.HAuthCorpErrorCallback = function(){};
+Native.prototype.callback.HAuthErrorCallback = function(){};
 
 //##################################################################
 
