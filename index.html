@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>blockchain</title>
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/blockchain/css/style.css">
+        <link rel="stylesheet" href="./css/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="/blockchain/js/handle.js"></script>
+        <script src="./js/handle.js"></script>
         <script>
           var name = "서재영";
           var ci = 'Jhd7ZLV1UIrCzqVYWUTFYhWfGJcAiZ6GYGPySWSWnIB1tZ3ta4Jq7sfESxfEthAubK+Rs+u4Xc+R3ogqDKMFQw==';
@@ -64,7 +64,19 @@
               else if (processID === 'CORP_MULTI_AUTH_NUMBER') {}
               else if (processID === 'CORP_MULTI_AUTH_SELECT') {}
               else if (processID === 'CORP_CERT_REVOC') {}
-              else if (processID === 'CORP_POSSIBLE_CERT_LIST') {}
+              else if (processID === 'CORP_POSSIBLE_CERT_LIST') {
+                const { businessUserInfoList } = resultData
+                let listHtml = "";
+                businessUserInfoList.forEach(element => {
+                  listHtml += "<div>"
+                    element.loginId + " | " +
+                    element.userName + " | " +
+                    element.deviceNo + " | " +
+                  +"</div>"
+                });
+                $("#dialogLayout .cantainer").html(listHtml)
+                $("#dialogLayout").dialog("open");
+              }
               else if (processID === 'CORP_CERT_AUTH_BEFORE_ISSUE') {}
               
             });
@@ -286,8 +298,7 @@
 
               $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
-                  $("#dialogLayout").dialog("open");
-                  event.preventDefault();
+                
               });
 
               $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
@@ -322,10 +333,7 @@
     <body>
 
       <div id="dialogLayout" title="인증서 발급 가능 목록">
-          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
-          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
-          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>
-          <div>서울시 중구청 | 발급일자 | 만료일자 2020-05-29 </div>  
+        <div class="cantainer"></div>
       </div>
 
       <div class="widget">
