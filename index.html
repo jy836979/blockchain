@@ -311,10 +311,10 @@
               $("#CORP_UNIT_CERT_LIST").button().on("click", function(event) {
                   console.log('button', this.textContent);
                   function success(result) {
-                    console.log("====CORP_UNIT_CERT_LIST",result);
+                    console.log("====CORP_UNIT_CERT_LIST",JSON.stringify(result));
                   }
                   function error(result) {
-                    console.error("====CORP_UNIT_CERT_LIST",result);
+                    console.error("====CORP_UNIT_CERT_LIST",JSON.stringify(result));
                   }
                   Native.api.getCorpCertificateList({success, error})
               });
