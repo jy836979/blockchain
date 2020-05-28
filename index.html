@@ -47,10 +47,16 @@
             console.log('notification',noti);
             alert(JSON.stringify(noti));
           });
+
+          
+          function selectCert({userName:name, bizrno:bizNo, loginId}) {
+            Native.api.createCertCorp({name, bizNo, loginId, hash:ci})
+            $('#dialogLayout').dialog("close");
+          }
           
           function init() {
             Native.event.registHAuthSuccess(function(result) {
-              alert('[success] '+JSON.stringify(result));
+              console.log('[success] '+JSON.stringify(result))
               const { processID, stepCode, message, result:resultData } = result;
 
               if (processID === 'CORP_CREATE_CERT') {}
@@ -67,10 +73,6 @@
               else if (processID === 'CORP_POSSIBLE_CERT_LIST') {
                 const { businessUserInfoList } = resultData
                 let listHtml = "";
-
-                function selectCert({userName:name, bizrno:bizNo, loginId}) {
-                  Native.api.createCertCorp({name, bizNo, loginId, hash:ci})
-                }
 
                 businessUserInfoList.forEach(element => {
                   listHtml += "<div onclick='selectCert("+JSON.stringify(element)+")'>" +
