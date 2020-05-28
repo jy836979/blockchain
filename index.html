@@ -61,7 +61,7 @@
           }
 
           function selectAuthCert({bizrNo:bizNo, loginId, certId}) {
-            cert = {name, bizNo, loginId, certId};
+            cert = {name, bizNo, loginId, certId, hash:ci};
             $('#certInfo').html("CERT : " + JSON.stringify(cert))
             alert("인증서가 선택되었습니다.");
           }
@@ -73,8 +73,7 @@
 
               if (processID === 'CORP_CREATE_CERT') {}
               else if (processID === 'CORP_CERT_AUTH') {
-                if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
-                Native.api.certAuthCorp(cert);
+                alert("인증서 인증 성공")
               }
               else if (processID === 'CORP_CERT_MNG_CHECK') {}
               else if (processID === 'CORP_CERT_MNG_RESET_PWD') {}
@@ -258,42 +257,51 @@
               
               $("#CORP_CREATE_CERT").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(params.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.createCertCorp(params);
               });
               
               $("#CORP_CERT_AUTH").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.certAuthCorp(cert);
               });
 
               $("#CORP_CERT_MNG_CHECK").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.certMngCheckCorp(cert);
               });
               $("#CORP_CERT_MNG_RESET_PWD").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.certMngResetPwdCorp(cert);
               });
               $("#CORP_CERT_MNG_ADD_FINGER").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.certMngAddFingerCorp(cert);
               });
               $("#CORP_CERT_MNG_ADD_PATTERN").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.certMngAddPatternCorp(cert);
               });
 
               $("#CORP_MULTI_AUTH_PUSH").button().on("click", function(event) {
-                  console.log('button', this.textContent);
-
+                  console.log('button', this.textContent);  
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.multiAuthPushCorp(cert);
               });
               $("#CORP_MULTI_AUTH_QR").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.multiAuthQRCorp(cert);
               });
               $("#CORP_MULTI_AUTH_NUMBER").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.multiAuthNumberCorp(cert);
               });
               $("#CORP_MULTI_AUTH_SELECT").button().on("click", function(event) {
                   console.log('button', this.textContent);
@@ -302,7 +310,8 @@
 
               $("#CORP_CERT_REVOC").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.multiAuthSelectCorp(cert);
               });
 
               $("#CORP_POSSIBLE_CERT_LIST").button().on("click", function(event) {
@@ -338,7 +347,8 @@
 
               $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
                   console.log('button', this.textContent);
-
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  Native.api.multiAuthSelectCorp(cert);
               });
 
 
