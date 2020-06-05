@@ -349,7 +349,17 @@
               $("#CORP_UNIT_DELETE_AUTH").button().on("click", function(event) {
                   console.log('button', this.textContent);
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
-                  Native.api.deleteAuth(cert);
+                  function success(result) { alert(JSON.stringify(result)); }
+                  function error(result) { alert(JSON.stringify(result)); }
+                  Native.api.deleteAuth({cert, success, error});
+              });
+              
+              $("#CORP_UNIT_GET_AUTH").button().on("click", function(event) {
+                  console.log('button', this.textContent);
+                  if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
+                  function success(result) { alert(JSON.stringify(result)); }
+                  function error(result) { alert(JSON.stringify(result)); }
+                  Native.api.getAuthTypeCorp({cert, success, error});
               });
 
 
@@ -502,6 +512,10 @@
 
           <span class="btn">
             <button id="CORP_UNIT_DELETE_AUTH" class="w200">(법인) 인증 타입 삭제</button>
+          </span>
+            
+          <span class="btn">
+            <button id="CORP_UNIT_GET_AUTH" class="w200">(법인) 추가 인증수단 조회</button>
           </span>
 
         </div>
