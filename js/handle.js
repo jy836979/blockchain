@@ -2007,6 +2007,7 @@ Native.prototype.callback.getCorpCertificateListError = function(){};
  */
 Native.prototype.api.deleteAuth = function(params) {
 	var options = {
+		certId: "",
 		success: function(result){},
 		error: function(result){console.error(result)}
 	};
@@ -2022,12 +2023,12 @@ Native.prototype.api.deleteAuth = function(params) {
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = $.extend(options, callback);
-		window.ScriptInterface.getCorpCertificateList(JSON.stringify(message));
+		window.ScriptInterface.deleteAuth(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
 		// Call iOS interface
-		var message = $.extend({ command: "getCorpCertificateList" }, options, callback);
+		var message = $.extend({ command: "deleteAuth" }, options, callback);
 		window.webkit.messageHandlers.api.postMessage(message);
 	} else {
 		// No Android or iOS interface found
@@ -2037,6 +2038,44 @@ Native.prototype.api.deleteAuth = function(params) {
 Native.prototype.callback.deleteAuthSuccess = function(){};
 Native.prototype.callback.deleteAuthError = function(){};
 
+/**
+ * (법인) 추가 인증수단 조회
+ * @param {String} certId 인증서 아이디 [필수]
+ * @param {callback} success(result) 성공
+ * @param {callback} error(result) 실패
+ */
+Native.prototype.api.getAuthTypeCorp = function(params) {
+	var options = {
+		certId: "",
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = {
+		success: "", error: "",
+		successCallback: 'Native.callback.getAuthTypeCorpSuccess',
+		errorCallback: 'Native.callback.getAuthTypeCorpError'
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getAuthTypeCorpSuccess = options.success;
+	Native.callback.getAuthTypeCorpError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getAuthTypeCorp(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "getAuthTypeCorp" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getAuthTypeCorpSuccess = function(){};
+Native.prototype.callback.getAuthTypeCorpError = function(){};
 
 /**
  * 통합인증 API 응답을 받기 위한 콜백 등록 - 성공
