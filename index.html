@@ -64,6 +64,7 @@
             cert = {name, bizNo, loginId, certId, hash:ci};
             $('#certInfo').html("CERT : " + JSON.stringify(cert))
             alert("인증서가 선택되었습니다.");
+            $('#dialogLayout').dialog("close");
           }
           
           function init() {
@@ -351,7 +352,7 @@
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
                   function success(result) { alert(JSON.stringify(result)); }
                   function error(result) { alert(JSON.stringify(result)); }
-                  Native.api.deleteAuth({cert, success, error});
+                  Native.api.deleteAuth({cert.certId, success, error});
               });
               
               $("#CORP_UNIT_GET_AUTH").button().on("click", function(event) {
@@ -359,7 +360,7 @@
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
                   function success(result) { alert(JSON.stringify(result)); }
                   function error(result) { alert(JSON.stringify(result)); }
-                  Native.api.getAuthTypeCorp({cert, success, error});
+                  Native.api.getAuthTypeCorp({cert.certId, success, error});
               });
 
 
