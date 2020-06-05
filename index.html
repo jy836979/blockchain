@@ -352,7 +352,7 @@
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
                   function success(result) { alert(JSON.stringify(result)); }
                   function error(result) { alert(JSON.stringify(result)); }
-                  Native.api.deleteAuth({cert.certId, success, error});
+                  Native.api.deleteAuth({certId: cert.certId, success, error});
               });
               
               $("#CORP_UNIT_GET_AUTH").button().on("click", function(event) {
@@ -360,7 +360,7 @@
                   if(cert.length == 0){ return alert('선택된 인증서가 없습니다.')}
                   function success(result) { alert(JSON.stringify(result)); }
                   function error(result) { alert(JSON.stringify(result)); }
-                  Native.api.getAuthTypeCorp({cert.certId, success, error});
+                  Native.api.getAuthTypeCorp({certId: cert.certId, success, error});
               });
 
 
