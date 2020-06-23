@@ -144,6 +144,12 @@
           }
           $(document).ready(function() {
               
+              $('#btn_gps').click(function(){
+                  Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
+                  Native.callback.locationDeniedAlertError = function() {alert("error")};
+                  Native.api.locationDeniedAlert();
+              });
+              
               $('#signup').click(function(){
                 console.log("signup");
                 
@@ -409,6 +415,9 @@
         </span>
         
         <div id="layout_person" style="display:none;">
+            <span class="btn">
+            <button id="btn_gps" class="w200">gps check</button>
+            </span>
             <span class="btn">
             <button id="btn1" class="w200">인증서발급</button>
             </span>
