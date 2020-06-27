@@ -734,10 +734,18 @@ Native.prototype.api.passwordCheck = function(params) {
 Native.prototype.callback.passwordCheckSuccess = function(){};
 Native.prototype.callback.passwordCheckError = function(){};
 
-// 앱 실행
+/**
+ * 앱 실행
+ * @param {String} intentUrl (android) 실행할 앱의 인텐트 url [필수]
+ * @param {String} scheme (ios) 실행할 앱의 scheme [필수]
+ * @param {callback} success 성공
+ * @param {callback} error 실패
+ * @description 
+ *	
+ */
 Native.prototype.api.launchApp = function(params) {
 	var options = {
-			packageName: "",
+			intentUrl: "",
 			scheme: "",
 			success: function(){},
 			error: function(error){console.error(error)}
@@ -749,7 +757,7 @@ Native.prototype.api.launchApp = function(params) {
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = {
-				packageName: options.packageName,
+				intentUrl: options.intentUrl,
 				successCallback: 'Native.callback.launchAppSuccess',
 				errorCallback: 'Native.callback.launchAppError'
 		};
@@ -772,6 +780,52 @@ Native.prototype.api.launchApp = function(params) {
 };
 Native.prototype.callback.launchAppSuccess = function(){};
 Native.prototype.callback.launchAppError = function(){};
+
+/**
+ * 스토어 이동
+ * @param {String} packageName (android) 플레이 스토어에 이동할 패키지명 [필수]
+ * @param {String} storeId (ios) 앱 스토어에 이동할 스토어 아이디 [필수]
+ * @param {callback} success 성공
+ * @param {callback} error 실패
+ */
+Native.prototype.api.goStore = function(params) {
+	var options = {
+			packageName: "",
+			storeId: "",
+			success: function(){},
+			error: function(error){console.error(error)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.goStoreSuccess = options.success;
+	Native.callback.goStoreError = options.error;
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				packageName: options.packageName,
+				successCallback: 'Native.callback.goStoreSuccess',
+				errorCallback: 'Native.callback.goStoreError'
+		};
+		window.ScriptInterface.goStore(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'goStore',
+				storeId: options.storeId,
+				successCallback: 'Native.callback.goStoreSuccess',
+				errorCallback: 'Native.callback.goStoreError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+Native.prototype.callback.goStoreSuccess = function(){};
+Native.prototype.callback.goStoreError = function(){};
+
 
 Native.prototype.api.test1 = function(name, value, fn) {
 	if (!name || !value) {
