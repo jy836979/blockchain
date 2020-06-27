@@ -734,6 +734,45 @@ Native.prototype.api.passwordCheck = function(params) {
 Native.prototype.callback.passwordCheckSuccess = function(){};
 Native.prototype.callback.passwordCheckError = function(){};
 
+// 앱 실행
+Native.prototype.api.launchApp = function(params) {
+	var options = {
+			packageName: "",
+			scheme: "",
+			success: function(){},
+			error: function(error){console.error(error)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.launchAppSuccess = options.success;
+	Native.callback.launchAppError = options.error;
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				packageName: options.packageName,
+				successCallback: 'Native.callback.launchAppSuccess',
+				errorCallback: 'Native.callback.launchAppError'
+		};
+		window.ScriptInterface.launchApp(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'launchApp',
+				scheme: options.scheme,
+				successCallback: 'Native.callback.launchAppSuccess',
+				errorCallback: 'Native.callback.launchAppError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+Native.prototype.callback.launchAppSuccess = function(){};
+Native.prototype.callback.launchAppError = function(){};
+
 Native.prototype.api.test1 = function(name, value, fn) {
 	if (!name || !value) {
 		return;
