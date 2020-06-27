@@ -147,8 +147,16 @@
               $('#btn_test').click(function(){
 //                   Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
 //                   Native.callback.locationDeniedAlertError = function() {alert("error")};
-//                   Native.api.locationDeniedAlert();                  
-                  location.href="intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+//                   Native.api.locationDeniedAlert();     
+                  
+                  if (window.ScriptInterface) {
+                      location.href="intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
+                  } else if(window.webkit
+                        && window.webkit.messageHandlers
+                        && window.webkit.messageHandlers.api) {
+                      location.href="naversearchapp://default?version=1"
+                  }
+
               });
               
               $('#signup').click(function(){
