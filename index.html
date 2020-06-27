@@ -144,10 +144,11 @@
           }
           $(document).ready(function() {
               
-              $('#btn_gps').click(function(){
-                  Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
-                  Native.callback.locationDeniedAlertError = function() {alert("error")};
-                  Native.api.locationDeniedAlert();
+              $('#btn_test').click(function(){
+//                   Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
+//                   Native.callback.locationDeniedAlertError = function() {alert("error")};
+//                   Native.api.locationDeniedAlert();                  
+                  location.href="intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
               });
               
               $('#signup').click(function(){
@@ -416,7 +417,7 @@
         
         <div id="layout_person" style="display:none;">
             <span class="btn">
-            <button id="btn_gps" class="w200">gps check</button>
+            <button id="btn_test" class="w200">test check</button>
             </span>
             <span class="btn">
             <button id="btn1" class="w200">인증서발급</button>
