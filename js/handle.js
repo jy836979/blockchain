@@ -741,8 +741,19 @@ Native.prototype.callback.passwordCheckError = function(){};
  * @param {callback} success 성공
  * @param {callback} error 실패
  * @description 
- *	
- */
+ *   앱이 설치되지 않은 경우 errorCallback 함수가 실행됩니다.
+ *   [네이버 앱 실행 예제] 
+ *     - 참고: https://developers.naver.com/docs/utils/mobileapp/
+ *     - 예제: 
+ *        Native.api.launchApp({
+ *          intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
+ *          scheme: "naversearchapp://default?version=1",
+ *          success: function(){},
+ *          error: function(){
+ *            alert("사용앱이 없습니다.")
+ *	    }
+ *        });
+ */  
 Native.prototype.api.launchApp = function(params) {
 	var options = {
 			intentUrl: "",
@@ -787,6 +798,17 @@ Native.prototype.callback.launchAppError = function(){};
  * @param {String} storeId (ios) 앱 스토어에 이동할 스토어 아이디 [필수]
  * @param {callback} success 성공
  * @param {callback} error 실패
+ * @description 
+ *   앱이 설치되지 않은 경우 errorCallback 함수가 실행됩니다.
+ *   [네이버 앱 스토어 이동 예제] 
+ *     - 참고: https://developers.naver.com/docs/utils/mobileapp/
+ *     - 예제: 
+ *        Native.api.goStore({
+ *          packageName: "com.nhn.android.search",
+ *          storeId: "id393499958",
+ *          success: function(){},
+ *          error: function(){}
+ *        });
  */
 Native.prototype.api.goStore = function(params) {
 	var options = {
