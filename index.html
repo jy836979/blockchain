@@ -149,14 +149,14 @@
 //                   Native.callback.locationDeniedAlertError = function() {alert("error")};
 //                   Native.api.locationDeniedAlert();     
                   
-                  if (window.ScriptInterface) {
-                      location.href="intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end"
-                  } else if(window.webkit
-                        && window.webkit.messageHandlers
-                        && window.webkit.messageHandlers.api) {
-                      location.href="naversearchapp://default?version=1#store_id=id393499958?mt=8"
-                  }
-
+                  Native.api.launchApp({
+                      packageName: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
+                      scheme: "naversearchapp://default?version=1",
+                      success: function(){},
+                      error: function(){
+                         alert("사용앱이 없습니다.");
+                      }
+                  })
               });
               
               $('#signup').click(function(){
