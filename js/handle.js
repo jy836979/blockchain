@@ -734,6 +734,69 @@ Native.prototype.api.passwordCheck = function(params) {
 Native.prototype.callback.passwordCheckSuccess = function(){};
 Native.prototype.callback.passwordCheckError = function(){};
 
+
+/**
+ * 앱 설치 여부 확인
+ * @param {String} intentUrl (android) 앱의 인텐트 url [필수]
+ * @param {String} scheme (ios) 앱의 scheme [필수]
+ * @param {callback} success 성공
+ * @param {callback} error 실패
+ * @description 
+ *   앱이 설치되지 않은 경우 errorCallback 함수가 실행됩니다.
+ *   [네이버 앱 실행 예제] 
+ *     - 참고: https://developers.naver.com/docs/utils/mobileapp/
+ *     - 예제: 
+ *        Native.api.isInstalledApp({
+ *          intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
+ *          scheme: "naversearchapp://default?version=1",
+ *          success: function(result){
+ *              if (result) {
+ *                  alert("앱 설치됨");
+ *              } else {
+ *                  alert("앱 설치 안됨");
+ *              }
+ *          },
+ *          error: function(){}
+ *        });
+ */  
+Native.prototype.api.isInstalledApp = function(params) {
+	var options = {
+			intentUrl: "",
+			scheme: "",
+			success: function(){},
+			error: function(error){console.error(error)}
+	};
+	$.extend(options, params? params : {});
+	Native.callback.isInstalledAppSuccess = options.success;
+	Native.callback.isInstalledAppError = options.error;
+	
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = {
+				intentUrl: options.intentUrl,
+				successCallback: 'Native.callback.isInstalledAppSuccess',
+				errorCallback: 'Native.callback.isInstalledAppError'
+		};
+		window.ScriptInterface.launchApp(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = {
+				command: 'isInstalledApp',
+				scheme: options.scheme,
+				successCallback: 'Native.callback.isInstalledAppSuccess',
+				errorCallback: 'Native.callback.isInstalledAppError'
+		};
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+};
+Native.prototype.callback.isInstalledAppSuccess = function(){};
+Native.prototype.callback.isInstalledAppError = function(){};
+
 /**
  * 앱 실행
  * @param {String} intentUrl (android) 실행할 앱의 인텐트 url [필수]
