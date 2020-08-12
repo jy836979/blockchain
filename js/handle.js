@@ -746,7 +746,7 @@ Native.prototype.callback.passwordCheckError = function(){};
  *     - 예제: 
  *        Native.api.isInstalledApp({
  *          package: "com.nhn.android.search",
- *          scheme: "naversearchapp://default?version=1",
+ *          scheme: "naversearchapp://",
  *          success: function(result){
  *              if (result) {
  *                  alert("앱 설치됨");
