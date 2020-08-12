@@ -150,7 +150,7 @@
 //                   Native.api.locationDeniedAlert();     
 
                   Native.api.isInstalledApp({
-                      intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
+                      package: "com.nhn.android.search",
                       scheme: "naversearchapp://default?version=1",
                       success: function(result){
                           if(result) {
