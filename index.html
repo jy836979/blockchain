@@ -143,24 +143,30 @@
             }
           }
           $(document).ready(function() {
-              
+              var pushCnt = 0;
               $('#btn_test').click(function(){
 //                   Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
 //                   Native.callback.locationDeniedAlertError = function() {alert("error")};
 //                   Native.api.locationDeniedAlert();     
                   
-                  Native.api.launchApp({
+                  Native.api.isInstalledApp({
                       intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
                       scheme: "naversearchapp://default?version=1",
-                      success: function(){},
+                      success: function(result){
+                          if(result) {
+                              alert(`앱 설치됨 [ 스키마 : ${scheme}, 회수 : ${++pushCnt} ]`)
+                          } else {
+                              alert(`앱 설치됨 [ 스키마 : ${scheme}, 회수 : ${pushCnt} ]`)
+                          }
+                      },
                       error: function(){
-                          if(!confirm("사용앱이 없습니다. 앱스토어로 이동하시겠습니까?")) return;
-                          Native.api.goStore({
-                              packageName: "com.nhn.android.search",
-                              storeId: "id393499958",
-                              success: function(){},
-                              error: function(){}
-                          })
+//                           if(!confirm("사용앱이 없습니다. 앱스토어로 이동하시겠습니까?")) return;
+//                           Native.api.goStore({
+//                               packageName: "com.nhn.android.search",
+//                               storeId: "id393499958",
+//                               success: function(){},
+//                               error: function(){}
+//                           })
                           
                       }
                   })
