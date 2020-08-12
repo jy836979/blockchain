@@ -737,17 +737,15 @@ Native.prototype.callback.passwordCheckError = function(){};
 
 /**
  * 앱 설치 여부 확인
- * @param {String} intentUrl (android) 앱의 인텐트 url [필수]
+ * @param {String} package (android) 앱의 package name [필수]
  * @param {String} scheme (ios) 앱의 scheme [필수]
  * @param {callback} success 성공
  * @param {callback} error 실패
  * @description 
- *   앱이 설치되지 않은 경우 errorCallback 함수가 실행됩니다.
- *   [네이버 앱 실행 예제] 
- *     - 참고: https://developers.naver.com/docs/utils/mobileapp/
+ *   successCallback에서 앱의 설치 여부를 {boolean} result 매개변수로 받습니다.
  *     - 예제: 
  *        Native.api.isInstalledApp({
- *          intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
+ *          package: "com.nhn.android.search",
  *          scheme: "naversearchapp://default?version=1",
  *          success: function(result){
  *              if (result) {
@@ -761,7 +759,7 @@ Native.prototype.callback.passwordCheckError = function(){};
  */  
 Native.prototype.api.isInstalledApp = function(params) {
 	var options = {
-			intentUrl: "",
+			package: "",
 			scheme: "",
 			success: function(){},
 			error: function(error){console.error(error)}
@@ -773,11 +771,11 @@ Native.prototype.api.isInstalledApp = function(params) {
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = {
-				intentUrl: options.intentUrl,
+				package: options.package,
 				successCallback: 'Native.callback.isInstalledAppSuccess',
 				errorCallback: 'Native.callback.isInstalledAppError'
 		};
-		window.ScriptInterface.launchApp(JSON.stringify(message));
+		window.ScriptInterface.isInstalledApp(JSON.stringify(message));
 	} else if (window.webkit
 			&& window.webkit.messageHandlers
 			&& window.webkit.messageHandlers.api) {
