@@ -148,14 +148,16 @@
 //                   Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
 //                   Native.callback.locationDeniedAlertError = function() {alert("error")};
 //                   Native.api.locationDeniedAlert();     
-                  
+                  alert(1)
                   Native.api.isInstalledApp({
                       intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
                       scheme: "naversearchapp://default?version=1",
                       success: function(result){
                           if(result) {
+                              alert(2)
                               alert(`앱 설치됨 [ 스키마 : ${scheme}, 회수 : ${++pushCnt} ]`)
                           } else {
+                              alert(3)
                               alert(`앱 설치됨 [ 스키마 : ${scheme}, 회수 : ${pushCnt} ]`)
                           }
                       },
