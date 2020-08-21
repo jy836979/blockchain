@@ -807,7 +807,6 @@ Native.prototype.callback.isInstalledAppError = function(){};
  *     - 참고: https://developers.naver.com/docs/utils/mobileapp/
  *     - 예제: 
  *        Native.api.launchApp({
- *          intentUrl: "intent://default?version=5#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end",
  *          scheme: "naversearchapp://default?version=1",
  *          success: function(){},
  *          error: function(){
@@ -829,7 +828,6 @@ Native.prototype.api.launchApp = function(params) {
 	if (window.ScriptInterface) {
 		// Call Android interface
 		var message = {
-				intentUrl: options.intentUrl,
 				scheme: options.scheme,
 				successCallback: 'Native.callback.launchAppSuccess',
 				errorCallback: 'Native.callback.launchAppError'
