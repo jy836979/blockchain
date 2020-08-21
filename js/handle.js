@@ -830,6 +830,7 @@ Native.prototype.api.launchApp = function(params) {
 		// Call Android interface
 		var message = {
 				intentUrl: options.intentUrl,
+				scheme: options.scheme,
 				successCallback: 'Native.callback.launchAppSuccess',
 				errorCallback: 'Native.callback.launchAppError'
 		};
