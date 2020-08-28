@@ -150,13 +150,12 @@
 //                   Native.api.locationDeniedAlert();     
                   
                   Native.api.launchApp({
-                    scheme: "naversearchapp://search?qmenu=smartbyimage#34;mode=qrpay&version=4",
+                    scheme: "naversearchapp://search?qmenu=smartbyimage#34;mode=qrpay#34;version=4",
                     success: function(){
 
                     },
                     error: function(error){
-                      fullSpinOff();
-                      toast('제로페이 앱 실행에 실패하였습니다. 잠시 후에 다시 시도해 주세요.(E00)');
+                      alert('제로페이 앱 실행에 실패하였습니다. 잠시 후에 다시 시도해 주세요.(E00)');
                     }
                   });
                   
