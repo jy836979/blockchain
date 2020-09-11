@@ -1568,6 +1568,45 @@ Native.prototype.api.deleteAuthType = function(params) {
 Native.prototype.callback.deleteAuthTypeSuccess = function(){};
 Native.prototype.callback.deleteAuthTypeError = function(){};
 
+
+/**
+ * 인증서 발급일자 조회
+ * @param {callback} success(result) 성공
+ * @param {callback} error() 실패
+ */
+Native.prototype.api.getCertificateIssueDate = function(params) {
+	var options = {
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = {
+		success: "", error: "",
+		successCallback: 'Native.callback.getCertificateIssueDateSuccess',
+		errorCallback: 'Native.callback.getCertificateIssueDateError'
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getCertificateIssueDateSuccess = options.success;
+	Native.callback.getCertificateIssueDateError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getCertificateIssueDate(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "getCertificateIssueDate" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getCertificateIssueDateSuccess = function(){};
+Native.prototype.callback.getCertificateIssueDateError = function(){};
+
+
 /**
  * 알파 테스트 버전조회
  * callback result {
