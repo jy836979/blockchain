@@ -2292,6 +2292,45 @@ Native.prototype.callback.getAuthTypeCorpSuccess = function(){};
 Native.prototype.callback.getAuthTypeCorpError = function(){};
 
 /**
+ * (법인) 인증서 발급일자 조회
+ * @param {String} certId 인증서 아이디 [필수]
+ * @param {callback} success(result) 성공
+ * @param {callback} error() 실패
+ */
+Native.prototype.api.getCertificateIssueDateCorp = function(params) {
+	var options = {
+		certId: '',
+		success: function(result){},
+		error: function(result){console.error(result)}
+	};
+	var callback = {
+		success: "", error: "",
+		successCallback: 'Native.callback.getCertificateIssueDateCorpSuccess',
+		errorCallback: 'Native.callback.getCertificateIssueDateCorpError'
+	};
+	$.extend(options, params? params : {});
+	Native.callback.getCertificateIssueDateCorpSuccess = options.success;
+	Native.callback.getCertificateIssueDateCorpError = options.error;
+
+	if (window.ScriptInterface) {
+		// Call Android interface
+		var message = $.extend(options, callback);
+		window.ScriptInterface.getCertificateIssueDateCorp(JSON.stringify(message));
+	} else if (window.webkit
+			&& window.webkit.messageHandlers
+			&& window.webkit.messageHandlers.api) {
+		// Call iOS interface
+		var message = $.extend({ command: "getCertificateIssueDateCorp" }, options, callback);
+		window.webkit.messageHandlers.api.postMessage(message);
+	} else {
+		// No Android or iOS interface found
+		console.log("No native APIs found.");
+	}
+}
+Native.prototype.callback.getCertificateIssueDateCorpSuccess = function(){};
+Native.prototype.callback.getCertificateIssueDateCorpError = function(){};
+
+/**
  * 통합인증 API 응답을 받기 위한 콜백 등록 - 성공
  * @return {String} processID 응답 구분을 위한 프로세스 아이디
  * @return {Number} stepCode 프로세스 진행 로그를 확인하기 위해 전달하는 스텝 코드 
