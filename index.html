@@ -145,19 +145,32 @@
           $(document).ready(function() {
               var pushCnt = 0;
               $('#btn_test').click(function(){
+                  
+                  if (navigator.share) {
+                    navigator.share({
+                      title: '\'카페디\' 어때요? 배달의민족 앱에서 확인해보세요.',
+                      url: 'https://baemin.me/0r5ek5mPu'
+                    }).then(() => {
+                      console.log('Thanks for sharing!');
+                    })
+                    .catch(console.error);
+                  } else {
+                    // fallback
+                  }
+                  
 //                   Native.callback.locationDeniedAlertSuccess = function() {alert("success")};
 //                   Native.callback.locationDeniedAlertError = function() {alert("error")};
 //                   Native.api.locationDeniedAlert();     
                   
-                  Native.api.launchApp({
-                    scheme: "naversearchapp://search?aasdfasdfsdfdsfa!!",
-                    success: function(){
+//                   Native.api.launchApp({
+//                     scheme: "naversearchapp://search?aasdfasdfsdfdsfa!!",
+//                     success: function(){
 
-                    },
-                    error: function(error){
-                      alert('제로페이 앱 실행에 실패하였습니다. 잠시 후에 다시 시도해 주세요.(E00)');
-                    }
-                  });
+//                     },
+//                     error: function(error){
+//                       alert('제로페이 앱 실행에 실패하였습니다. 잠시 후에 다시 시도해 주세요.(E00)');
+//                     }
+//                   });
                   
                   /*  
                   Native.api.launchApp({
