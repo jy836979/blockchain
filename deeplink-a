@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Redirect</title>
+    <script type="text/javascript">
+        var appOpened = false;
+
+        function handleVisibilityChange() {
+            if (document.visibilityState === 'visible' && !appOpened) {
+                // Fallback to the App Store
+                window.location = "https://apps.apple.com/app/id1318541802";
+            }
+        }
+
+        function launchAppOrStore() {
+            // Listen for visibility change
+            document.addEventListener('visibilitychange', handleVisibilityChange, false);
+
+            // Try launching the app using the custom URL scheme
+            var appURL = "sccapp://";
+            window.location = appURL;
+
+            setTimeout(function() {
+                appOpened = true;
+            }, 500);
+        }
+  
+        // function launchAppOrStore() {
+        //     // Define the custom URL scheme for your app
+        //     var appURL = "sccapp://";
+            
+        //     // Define the App Store URL
+        //     var storeURL = "https://apps.apple.com/app/id1318541802";
+            
+        //     // Try launching the app using the custom URL scheme
+        //     window.location = appURL;
+            
+        //     // Fallback to the App Store after a short delay
+        //     setTimeout(function() {
+        //         window.location = storeURL;
+        //     }, 500);
+        // }
+    </script>
+</head>
+<body>
+
+<button onclick="launchAppOrStore()">Open App or Go to Store</button>
+
+</body>
+</html>
