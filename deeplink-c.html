@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App Redirect</title>
+    <script type="text/javascript">
+        var timer;
+        var heartbeat;
+        var lastIntervalId;
+
+        function preventStoreRedirect() {
+            clearTimeout(timer);
+            clearInterval(heartbeat);
+            window.removeEventListener('blur', preventStoreRedirect);
+        }
+
+        function launchAppOrStore() {
+            var appURL = "sccapp://";
+            var storeURL = "https://apps.apple.com/app/id1318541802";
+
+            // Clear any existing timers and event listeners
+            clearTimeout(timer);
+            clearInterval(heartbeat);
+            window.removeEventListener('blur', preventStoreRedirect);
+
+            // Listen for the window to lose focus
+            window.addEventListener('blur', preventStoreRedirect);
+
+            // Try to open the app
+            window.location.href = appURL;
+
+            // Start a timer to redirect to the App Store
+            timer = setTimeout(function() {
+                window.location.href = storeURL;
+            }, 2000);
+
+            // Start a heartbeat to clear the App Store timer if the window gains focus
+            lastIntervalId = setInterval(function() {
+                if (document.hasFocus()) {
+                    preventStoreRedirect();
+                }
+            }, 100);
+        }
+  
+        // function launchAppOrStore() {
+        //     // Define the custom URL scheme for your app
+        //     var appURL = "sccapp://";
+            
+        //     // Define the App Store URL
+        //     var storeURL = "https://apps.apple.com/app/id1318541802";
+            
+        //     // Try launching the app using the custom URL scheme
+        //     window.location = appURL;
+            
+        //     // Fallback to the App Store after a short delay
+        //     setTimeout(function() {
+        //         window.location = storeURL;
+        //     }, 500);
+        // }
+    </script>
+</head>
+<body>
+
+<button onclick="launchAppOrStore()">Open App or Go to Store</button>
+
+</body>
+</html>
