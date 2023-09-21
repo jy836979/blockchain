@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Redirect</title>
+    <script type="text/javascript">
+        function launchAppOrStore() {
+            // Define the custom URL scheme for your app
+            var appURL = "sccapp://";
+            
+            // Define the App Store URL
+            var storeURL = "https://apps.apple.com/app/id1318541802";
+            
+            // Try launching the app using the custom URL scheme
+            window.location = appURL;
+            
+            // Fallback to the App Store after a short delay
+            setTimeout(function() {
+                window.location = storeURL;
+            }, 500);
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="launchAppOrStore()">Open App or Go to Store</button>
+
+</body>
+</html>
